@@ -23,19 +23,19 @@ describe('RGB to Hex', function() {
 
 });
 
-describe('RGB to Complimentary', function() {
+describe('RGB to Accent', function() {
 
-  it('convert.rgbToComplimentary("rgb(25, 69, 32)") should equal "rgb(69,25,62)"', function(){
-    expect(convert.rgbToComplimentary("rgb(25, 69, 32)")).to.equal("rgb(69,25,62)");
+  it('convert.rgbToAccent("rgb(25, 69, 32)") should equal "rgb(69,25,62)"', function(){
+    expect(convert.rgbToAccent("rgb(25, 69, 32)")).to.equal("rgb(69,25,62)");
   });
-  it('convert.rgbToComplimentary("rgb(217, 157, 54)") should equal "rgb(54,114,217)"', function(){
-    expect(convert.rgbToComplimentary("rgb(217, 157, 54)")).to.equal("rgb(54,114,217)");
+  it('convert.rgbToAccent("rgb(217, 157, 54)") should equal "rgb(54,114,217)"', function(){
+    expect(convert.rgbToAccent("rgb(217, 157, 54)")).to.equal("rgb(54,114,217)");
   });
-  it('convert.rgbToComplimentary("rgb(177, 150, 214)") should equal "rgb(187,214,150)"', function(){
-    expect(convert.rgbToComplimentary("rgb(177, 150, 214)")).to.equal("rgb(187,214,150)");
+  it('convert.rgbToAccent("rgb(177, 150, 214)") should equal "rgb(187,214,150)"', function(){
+    expect(convert.rgbToAccent("rgb(177, 150, 214)")).to.equal("rgb(187,214,150)");
   });    
   it('r) should be false', function(){
-    expect(convert.rgbToComplimentary("r)")).to.be.false;
+    expect(convert.rgbToAccent("r)")).to.be.false;
   });  
 
 });
@@ -50,6 +50,20 @@ describe('RGB to Gray', function() {
   }) 
   it('r) should be false', function(){
     expect(convert.rgbToGray("r)")).to.be.false;
+  });  
+
+});
+
+describe('RGB to Tone', function() {
+
+  it('convert.rgbToTone("rgb(0,0,0)") should equal "#fff"', function(){
+    expect(convert.rgbToTone("rgb(0,0,0)")).to.equal("#fff");
+  });
+  it('convert.rgbToTone("rgb(255,255,255)") should equal "#222"', function(){
+    expect(convert.rgbToTone("rgb(255,255,255)")).to.equal("#222");
+  }) 
+  it('r) should be false', function(){
+    expect(convert.rgbToTone("r)")).to.be.false;
   });  
 
 });

@@ -23,7 +23,7 @@ module.exports = (function() {
 	 * @param [String] rgb : rgb value	
 	 * @return [String] : random rgb value
 	 */
-	function rgbToComplimentary( rgb ) {
+	function rgbToAccent( rgb ) {
 
 		if( !( validate.rgb( rgb )) ) {
 			return false;
@@ -59,6 +59,34 @@ module.exports = (function() {
 		rgb = hslToRgb(hsl[0], hsl[1], l);
 		return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
 	}
+
+	/* Public function : Returns black or white hex depending on rgb tone
+	 * @param [String] rgb : rgb value	 
+	 * @param [String] shade : light outputs light color
+	 * @return [String] : random rgb value
+	 */
+	 function rgbToTone( rgb ) {
+
+		if( !( validate.rgb( rgb )) ) {
+			return false;
+		}
+
+	 	// Split rgb 
+		rgb = rgbToArray(rgb);
+
+		var brightness;
+		brightness = ( rgb[1] * 299 ) + ( rgb[2] * 587 ) + ( rgb[3] * 114 );
+		brightness = brightness / 255000;
+
+		// values range from 0 to 1
+		// anything greater than 0.5 should be bright enough for dark text
+		if ( brightness >= 0.5 ) {
+		return "#222";
+		} else {
+		return "#fff";
+		}
+
+	};
 
 	/* Private function : convert rgb to array with each value
 	 * @param [String] : rgb value
@@ -131,9 +159,11 @@ module.exports = (function() {
 	}
 
 	return {
+		rgbToAccent: rgbToAccent,		
 		rgbToGray: rgbToGray,
-		rgbToHex : rgbToHex,
-		rgbToComplimentary: rgbToComplimentary
+		rgbToHex: rgbToHex,
+		rgbToTone: rgbToTone
+
 	}
 
 })();

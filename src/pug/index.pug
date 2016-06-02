@@ -51,9 +51,27 @@ html(class="no-js" lang="")
 
                     p In elit duis occaecat 
                         a(href="#") short loin
-                    Z|. Leberkas sed cupim, turkey ipsum sirloin irure enim esse shankle aute ham hock landjaeger.
-        #primary
-        #complimentary
-        #gray
-        #gray-dark
-                script(src="js/main.js")
+                    |. Leberkas sed cupim, turkey ipsum sirloin irure enim esse shankle aute ham hock landjaeger.
+        header.navbar.navbar-full.navbar-dark.navbar-fixed-top
+            .container
+                a.navbar-brand( href="#" ) Palette Generator
+                .collapse.navbar-toggleable-xs( id=id )
+                  ul.nav.navbar-nav
+                    li.nav-item
+                      a.nav-link( href="#") See your palette on an example site
+                      button.btn.btn-primary#random-palette( type="submit") Random Palette  
+                  form.form-inline.pull-xs-right
+                    input.form-control( type="text" placeholder="search")
+                    button.btn.btn-primary( type="submit") Search               
+        main
+            #primary.palette
+                h2 Primary
+            #accent.palette
+                h2 Accent
+            #gray-light.palette
+                h2 Light Gray
+            #body.palette
+                h2 Tone
+            #gray-dark.palette
+                h2 Dark Gray
+        script(src="js/main.js")

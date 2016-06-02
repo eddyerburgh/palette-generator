@@ -2,23 +2,44 @@ var Palette = require('./modules/palette.js');
 var random = require('./modules/random.js');
 var convert = require('./modules/convert.js');
 var validate = require('./modules/validate.js');
+var $ = require('jQuery');
 
-console.log(Palette);
-var rgb = random.rgb();
-var hex = convert.rgbToHex(rgb);
-var compl = convert.rgbToComplimentary(rgb);
-var dgray = convert.rgbToGray(rgb, "dark");
-var lgray = convert.rgbToGray(rgb, "light");
-var pal = new Palette(hex, compl, gray);
+(function(){
+	// Cache Dom
+	var $main = $("main");
+	// Palettes
+	var $primary = $main.find("#primary");
+	var $accent = $main.find("#accent");
+	var $grayLight = $main.find("#gray-light");
+	//var $tone = $main.find("tone");
+	var $grayDark = $main.find("#gray-dark");
+	// Buttons
+	var $randomPalette = $("#random-palette");
 
-var prim = document.getElementById("primary");
-prim.style.background = rgb;
+	// Create palette
+	var palette = new Palette(random.rgb());
 
-var complim = document.getElementById("complimentary");
-complim.style.background = compl;
+	// Set colors on init
+	setColors();
 
-var grayB = document.getElementById("gray");
-grayB.style.background = lgray;
+	function setColors() {
+		$primary.css("background", palette.primary);
+		$accent.css("background", palette.accent);
+		$grayLight.css("background", palette.grayLight);
+		//$tone.css("background", palette.)		
+		$grayDark.css("background", palette.grayDark);
 
-var graydB = document.getElementById("gray-dark");
-graydB.style.background = dgray;
+		$primary.css("color", palette.primaryColor);
+		$accent.css("color", palette.accentColor);
+		$grayLight.css("color", palette.grayLightColor);
+		//$tone.css("background", palette.)		
+		$grayDark.css("color", palette.grayDarkColor);													
+	}
+
+	// randomPalette Bind events
+	$randomPalette.click(function(){
+		palette = new Palette(random.rgb());
+		setColors();
+	});
+
+})()
