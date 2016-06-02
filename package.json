@@ -1,0 +1,11 @@
+{
+  "name": "Palette Generator",
+  "version": "0.1.0",
+  "devDependencies": {
+    "browser-sync": "^2.12.10",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-pug": "^3.0.3",
+    "gulp-sass": "^2.3.1"
+  }
+}
