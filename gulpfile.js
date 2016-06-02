@@ -59,6 +59,6 @@ gulp.task('watch', ['browserSync', 'sass'], function() {
 	gulp.watch('./src/scss/**/*.scss', ['sass']);
 	gulp.watch('./src/pug/**/*.pug', ['pug']);
 	gulp.watch('./src/js/**/*.js', ['scripts']);
-  gulp.watch(['./src/js/**/*.js', './test/**'], ['mocha']);
+  gulp.watch(['./src/js/**/*.js', './test/**/*.js'], ['mocha']);
 });
 

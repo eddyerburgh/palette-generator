@@ -1,4 +1,4 @@
-var random = (function() {
+module.exports = (function() {
 
 	/* Private function : returns random number between min and max
 	 * @params [Number] : min, minimum value; [Number] : max, maximum value
@@ -12,9 +12,9 @@ var random = (function() {
 	 * @return [String] : random rgb value
 	 */
 	function randRgb() {
-		var r = rand(0, 250);
-		var g = rand(0, 250);
-		var b = rand(0, 250);
+		var r = rand(0, 255);
+		var g = rand(0, 255);
+		var b = rand(0, 255);
 
 		return "rgb(" + r + "," + g + "," + b + ")"
 	}	
@@ -24,5 +24,3 @@ var random = (function() {
 	}
 
 })();
-
-module.exports = random;    

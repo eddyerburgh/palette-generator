@@ -1,2 +1,13 @@
+body,
+html {
+  height: 100%; }
+
 #example-page {
   display: none; }
+
+#primary,
+#complimentary,
+#gray,
+#gray-dark {
+  width: 200px;
+  height: 50px; }
