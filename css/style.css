@@ -1,5 +1,19 @@
+.btn {
+  padding: .4rem 3rem;
+  border-radius: 2rem !important; }
+
+body {
+  font-family: "oxygen", sans-serif; }
+
 #example-page {
-  display: none; }
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  background: #fff;
+  min-height: 100%;
+  z-index: 9999; }
 
 html,
 body,
@@ -19,3 +33,9 @@ header {
   display: flex;
   align-items: center;
   justify-content: center; }
+
+.p-b-10 {
+  padding-bottom: 10rem !important; }
+
+.m-t-minus-11 {
+  margin-top: -11rem !important; }

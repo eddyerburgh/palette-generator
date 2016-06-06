@@ -24,7 +24,7 @@ html(class="no-js" lang="")
         meta(name="description" content="")
         meta(name="viewport" content="width=device-width, initial-scale=1")
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css")
-        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oxygen")
 
         link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css")
         link(rel="apple-touch-icon" href="apple-touch-icon.png")
@@ -37,28 +37,42 @@ html(class="no-js" lang="")
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
             <![endif]
 
-        #example-page
-            .bg-primary.p-t-3.p-b-3.m-b-3
+        #example-page.bg-gray-light
+            .bg-primary.p-t-3.p-b-10.m-b-3
                 .container
                     .row.text-xs-center
-                        h2.m-b-3 Example Page
-                        button( type="button" class="btn btn-secondary") Close
+                        h2.m-b-3.m-t-3.display-2 Example Page
+                        button.m-b-3.m-t-3.m-r-1.example-toggle( type="button" class="btn btn-secondary") Close
+                        button.m-b-3.m-t-3( type="button" class="btn btn-warning") View on Github                       
             .container
-                .row
-                    p Proident tenderloin est, dolore fatback drumstick ribeye pancetta incididunt in filet mignon labore non. Leberkas sed cupim, turkey ipsum sirloin irure enim esse shankle aute ham hock landjaeger. Hamburger dolore velit, fatback chuck doner occaecat. Pig leberkas short ribs jowl flank filet mignon swine. 
-                        a(href="#") Proident cow 
-                        sausage frankfurter turkey.
+                .row.display-lg-flex.hidden.m-t-minus-11
+                    .col-lg-4.display-lg-flex
+                        .card.text-xs-center
+                            .card-block
+                                h4.card-title.m-b-1 Lightweight
+                                i.fa.fa-cloud.fa-5x.fa-fixed.block.m-b-2                   
+                                p.card-text As many styles as needed an no more. This is a lightweight theme.
+                    .col-lg-4.display-lg-flex
+                        .card.text-xs-center
+                            .card-block
+                                h4.card-title.m-b-1 Customizable
+                                i.fa.fa-wrench.fa-5x.fa-fixed.block.m-b-2          
+                                p.card-text Written in SCSS using Bootstrap mixins. It's easy to customize the source code.
 
-                    p In elit duis occaecat 
-                        a(href="#") short loin
-                    |. Leberkas sed cupim, turkey ipsum sirloin irure enim esse shankle aute ham hock landjaeger.
+                    .col-lg-4.display-lg-flex
+                        .card.text-xs-center
+                            .card-block
+                                h4.card-title.m-b-1 Free
+                                i.fa.fa-money.fa-5x.fa-fixed.block.m-b-2 
+                                p.card-text Free-fallin', free as a bird, free as in beer. Land of the free. It's free.                
+
         header.navbar.navbar-full.navbar-dark.navbar-fixed-top
             .container
                 a.navbar-brand( href="#" ) Palette Generator
                 .collapse.navbar-toggleable-xs( id=id )
                   ul.nav.navbar-nav
                     li.nav-item
-                      a.nav-link( href="#") See your palette on an example site
+                      a.nav-link.example-toggle( href="#") See your palette on an example site
                       button.btn.btn-primary#random-palette( type="submit") Random Palette  
                   form.form-inline.pull-xs-right
                     input.form-control( type="text" placeholder="search")
