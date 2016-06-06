@@ -43,10 +43,10 @@ describe('RGB to Accent', function() {
 describe('RGB to Gray', function() {
 
   it('convert.rgbToGray("rgb(158, 86, 183)", "dark") should equal "rgb(23, 11, 27)"', function(){
-    expect(convert.rgbToGray("rgb(158, 86, 183)", "dark")).to.equal("rgb(23,11,27)");
+    expect(convert.rgbToGray("rgb(158, 86, 183)", "dark")).to.equal("rgb(27,22,29)");
   });
-  it('convert.rgbToGray("rgb(158, 86, 183)", "light") should equal "rgb(250,246,251)"', function(){
-    expect(convert.rgbToGray("rgb(158, 86, 183)", "light")).to.equal("rgb(250,246,251)");
+  it('convert.rgbToGray("rgb(158, 86, 183)", "light") should equal "rgb(242,232,245)"', function(){
+    expect(convert.rgbToGray("rgb(158, 86, 183)", "light")).to.equal("rgb(242,232,245)");
   }) 
   it('r) should be false', function(){
     expect(convert.rgbToGray("r)")).to.be.false;
@@ -59,8 +59,8 @@ describe('RGB to Tone', function() {
   it('convert.rgbToTone("rgb(0,0,0)") should equal "#fff"', function(){
     expect(convert.rgbToTone("rgb(0,0,0)")).to.equal("#fff");
   });
-  it('convert.rgbToTone("rgb(255,255,255)") should equal "#222"', function(){
-    expect(convert.rgbToTone("rgb(255,255,255)")).to.equal("#222");
+  it('validate.rgb(convert.rgbToTone("rgb(255,255,255)", "rgb(0,0,0)")) should be true', function(){
+    expect(validate.rgb(convert.rgbToTone("rgb(255,255,255)", "rgb(0,0,0)"))).to.be.true;
   }) 
   it('r) should be false', function(){
     expect(convert.rgbToTone("r)")).to.be.false;
@@ -68,3 +68,10 @@ describe('RGB to Tone', function() {
 
 });
 
+describe('Hex to RGB', function() {
+
+  it('convert.hexToRgb("#fff") should equal "rgb(255,255,255)"', function(){
+    expect(convert.hexToRgb("#fff")).to.equal("rgb(255,255,255)");
+  })
+
+});

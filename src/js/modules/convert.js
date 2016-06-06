@@ -54,9 +54,12 @@ module.exports = (function() {
 		rgb = rgbToArray( rgb );
 		// Get HSL value as array
 		var hsl = rgbToHsl( rgb[1], rgb[2], rgb[3] );
-		var l = hsl[2];
-		l = shade === "light" ? 0.975 : 0.075;
-		rgb = hslToRgb(hsl[0], hsl[1], l);
+		var h = hsl[0], s = hsl[1], l = hsl[2];
+		l = shade === "dark" ? 0.1 : 0.935;
+		if ( shade === "dark") { 
+			s -= s / 1.5; 
+		};
+		rgb = hslToRgb(h, s, l);
 		return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
 	}
 
@@ -65,7 +68,7 @@ module.exports = (function() {
 	 * @param [String] shade : light outputs light color
 	 * @return [String] : random rgb value
 	 */
-	 function rgbToTone( rgb ) {
+	 function rgbToTone( rgb, gray ) {
 
 		if( !( validate.rgb( rgb )) ) {
 			return false;
@@ -81,11 +84,24 @@ module.exports = (function() {
 		// values range from 0 to 1
 		// anything greater than 0.5 should be bright enough for dark text
 		if ( brightness >= 0.5 ) {
-		return "#222";
+		return gray;
 		} else {
 		return "#fff";
 		}
 
+	};
+
+	/* Public function : Converts hex to rgb value
+	 * @param [String] hex : hex value	 
+	 * @return [String] : rgb value
+	 */
+	function hexToRgb(hex) {
+    return 'rgb(' + (hex = hex.replace('#', ''))
+    		.match(new RegExp('(.{' + hex.length/3 + '})', 'g'))
+    		.map(function(l) { 
+    			return parseInt(hex.length%2 ? l+l : l, 16); 
+    		})
+    		.join(',') + ')';
 	};
 
 	/* Private function : convert rgb to array with each value
@@ -159,6 +175,7 @@ module.exports = (function() {
 	}
 
 	return {
+		hexToRgb: hexToRgb,
 		rgbToAccent: rgbToAccent,		
 		rgbToGray: rgbToGray,
 		rgbToHex: rgbToHex,

@@ -37,30 +37,30 @@ html(class="no-js" lang="")
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
             <![endif]
 
-        #example-page.bg-gray-light
-            .bg-primary.p-t-3.p-b-10.m-b-3
+        #example-page.background-gray-light
+            .background-primary.p-t-3.p-b-10.m-b-3
                 .container
                     .row.text-xs-center
-                        h2.m-b-3.m-t-3.display-2 Example Page
-                        button.m-b-3.m-t-3.m-r-1.example-toggle( type="button" class="btn btn-secondary") Close
-                        button.m-b-3.m-t-3( type="button" class="btn btn-warning") View on Github                       
+                        h2.m-b-3.m-t-3.display-2.color-primary-tone Example Page
+                        button.m-b-3.m-t-3.m-r-1.example-toggle.btn-rounded.btn.btn-secondary( type="button") Close
+                        button.btn-rounded.btn.button-accent.color-accent-tone.m-b-3.m-t-3.random-palette( type="button") New Palette                     
             .container
                 .row.display-lg-flex.hidden.m-t-minus-11
                     .col-lg-4.display-lg-flex
-                        .card.text-xs-center
+                        .card.text-xs-center.color-gray-dark
                             .card-block
                                 h4.card-title.m-b-1 Lightweight
-                                i.fa.fa-cloud.fa-5x.fa-fixed.block.m-b-2                   
-                                p.card-text As many styles as needed an no more. This is a lightweight theme.
+                                i.fa.fa-cloud.fa-5x.fa-fixed.block.m-b-2         
+                                p.card-text As many styles as needed and no more. This is a lightweight theme.
                     .col-lg-4.display-lg-flex
-                        .card.text-xs-center
+                        .card.text-xs-center.color-gray-dark
                             .card-block
                                 h4.card-title.m-b-1 Customizable
                                 i.fa.fa-wrench.fa-5x.fa-fixed.block.m-b-2          
                                 p.card-text Written in SCSS using Bootstrap mixins. It's easy to customize the source code.
 
                     .col-lg-4.display-lg-flex
-                        .card.text-xs-center
+                        .card.text-xs-center.color-gray-dark
                             .card-block
                                 h4.card-title.m-b-1 Free
                                 i.fa.fa-money.fa-5x.fa-fixed.block.m-b-2 
@@ -73,19 +73,19 @@ html(class="no-js" lang="")
                   ul.nav.navbar-nav
                     li.nav-item
                       a.nav-link.example-toggle( href="#") See your palette on an example site
-                      button.btn.btn-primary#random-palette( type="submit") Random Palette  
-                  form.form-inline.pull-xs-right
-                    input.form-control( type="text" placeholder="search")
-                    button.btn.btn-primary( type="submit") Search               
+                       
+                form.form-inline.pull-xs-right
+                    input.form-control( type="text" placeholder="enter color")
+                    button.btn.btn-primary( type="submit") Create Palette               
+                button.btn.btn-danger.random-palette.pull-xs-right.m-r-1( type="submit") Random Palette 
         main
             #primary.palette
-                h2 Primary
+                h3#primary__hex
             #accent.palette
-                h2 Accent
+                h3#accent__hex
             #gray-light.palette
-                h2 Light Gray
+                h3#gray-light__hex
             #body.palette
-                h2 Tone
             #gray-dark.palette
-                h2 Dark Gray
+                h3#gray-dark__hex
         script(src="js/main.js")

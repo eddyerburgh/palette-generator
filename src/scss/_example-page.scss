@@ -8,7 +8,10 @@
   top: 0;
   right: 0;
   left: 0;
-  background: $color-white;
   min-height: 100%;
   z-index: 9999;
+}
+
+.card {
+	border: none;
 }

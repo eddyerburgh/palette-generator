@@ -9815,82 +9815,9 @@ return jQuery;
 }));
 
 },{}],2:[function(require,module,exports){
-var Palette = require('./modules/palette.js');
-var random = require('./modules/random.js');
-var convert = require('./modules/convert.js');
-var validate = require('./modules/validate.js');
-var $ = require('jQuery');
+var frontEnd = require('./modules/front-end');
 
-(function(){
-	// 	Cache Dom
-	var $main = $("main");
-	// 	Palettes
-		$primary = $main.find("#primary"),
-		$accent = $main.find("#accent"),
-		$grayLight = $main.find("#gray-light"),
-	//var $tone = $main.find("tone");
-		$grayDark = $main.find("#gray-dark"),
-	// 	Buttons
-		$randomPalette = $("#random-palette"),
-		$exampleToggle = $(".example-toggle"),
-	// 	Example Page
-		$example = $("#example-page"),
-		$bgPrimary = $example.find(".bg-primary"),
-		$bgAccent = $example.find(".bg-accent"),
-		$bgGrayLight = $example.find(".bg-gray-light"),
-
-		$colorAccent = $example.find(".color-accent"),
-		$colorGrayDark = $example.find(".color-gray-dark"),
-		//$color = $example.find(".bg-accent"),
-
-		// Used to add important to CSS declarations
-		imp = "!important";
-
-	// Create palette
-	var palette = new Palette("rgb(14, 72, 224)");
-
-	// Set colors on init
-	setColors();
-
-	function setColors() {
-		var primary = palette.primary + imp;
-		console.log(primary)
-		// Set palette Colors
-		$primary.css("background", palette.primary);
-		$accent.css("background", palette.accent);
-		$grayLight.css("background", palette.grayLight);
-		//$tone.css("background", palette.)		
-		$grayDark.css("background", palette.grayDark);
-
-		$primary.css("color", palette.primaryColor);
-		$accent.css("color", palette.accentColor);
-		$grayLight.css("color", palette.grayLightColor);
-		//$tone.css("background", palette.)		
-		$grayDark.css("color", palette.grayDarkColor);
-
-		$bgPrimary.css("background-color", primary);
-		$bgAccent.css("background", palette.primary + imp);
-		$bgGrayLight.css("background", palette.grayLight + imp);
-
-		$colorAccent.css("color", palette.accent + imp);
-		$colorGrayDark.css("color", palette.grayDark + imp);
-
-	}
-
-	// randomPalette Bind events
-	$randomPalette.click(function(){
-		palette = new Palette(random.rgb());
-		setColors();
-	});
-
-	// Show example site on click
-	$exampleToggle.click(function(){
-		$example.fadeToggle();
-	});
-
-})()
-
-},{"./modules/convert.js":3,"./modules/palette.js":4,"./modules/random.js":5,"./modules/validate.js":6,"jQuery":1}],3:[function(require,module,exports){
+},{"./modules/front-end":4}],3:[function(require,module,exports){
 var validate = require('./validate.js');
 
 module.exports = (function() {
@@ -9947,9 +9874,12 @@ module.exports = (function() {
 		rgb = rgbToArray( rgb );
 		// Get HSL value as array
 		var hsl = rgbToHsl( rgb[1], rgb[2], rgb[3] );
-		var l = hsl[2];
-		l = shade === "light" ? 0.975 : 0.075;
-		rgb = hslToRgb(hsl[0], hsl[1], l);
+		var h = hsl[0], s = hsl[1], l = hsl[2];
+		l = shade === "dark" ? 0.1 : 0.935;
+		if ( shade === "dark") { 
+			s -= s / 1.5; 
+		};
+		rgb = hslToRgb(h, s, l);
 		return "rgb(" + rgb[0] + "," + rgb[1] + "," + rgb[2] + ")";
 	}
 
@@ -9958,7 +9888,7 @@ module.exports = (function() {
 	 * @param [String] shade : light outputs light color
 	 * @return [String] : random rgb value
 	 */
-	 function rgbToTone( rgb ) {
+	 function rgbToTone( rgb, gray ) {
 
 		if( !( validate.rgb( rgb )) ) {
 			return false;
@@ -9974,11 +9904,24 @@ module.exports = (function() {
 		// values range from 0 to 1
 		// anything greater than 0.5 should be bright enough for dark text
 		if ( brightness >= 0.5 ) {
-		return "#222";
+		return gray;
 		} else {
 		return "#fff";
 		}
 
+	};
+
+	/* Public function : Converts hex to rgb value
+	 * @param [String] hex : hex value	 
+	 * @return [String] : rgb value
+	 */
+	function hexToRgb(hex) {
+    return 'rgb(' + (hex = hex.replace('#', ''))
+    		.match(new RegExp('(.{' + hex.length/3 + '})', 'g'))
+    		.map(function(l) { 
+    			return parseInt(hex.length%2 ? l+l : l, 16); 
+    		})
+    		.join(',') + ')';
 	};
 
 	/* Private function : convert rgb to array with each value
@@ -10052,6 +9995,7 @@ module.exports = (function() {
 	}
 
 	return {
+		hexToRgb: hexToRgb,
 		rgbToAccent: rgbToAccent,		
 		rgbToGray: rgbToGray,
 		rgbToHex: rgbToHex,
@@ -10060,26 +10004,129 @@ module.exports = (function() {
 	}
 
 })();
-},{"./validate.js":6}],4:[function(require,module,exports){
+},{"./validate.js":7}],4:[function(require,module,exports){
+var Palette = require('./palette.js');
+var random = require('./random.js');
 var convert = require('./convert.js');
+var validate = require('./validate.js');
+var $ = require('jQuery');
 
-module.exports = function(rgb) {
+(function(){
+	// 	Cache Dom
+	var $main = $("main");
+	// 	Palettes
+		$primary = $main.find("#primary"),
+		$accent = $main.find("#accent"),
+		$grayLight = $main.find("#gray-light"),
+		$grayDark = $main.find("#gray-dark"),
+		$primaryHex = $main.find("#primary__hex"),
+		$accentHex = $main.find("#accent__hex"),
+		$grayLightHex = $main.find("#gray-light__hex"),
+		$grayDarkHex = $main.find("#gray-dark__hex"),		
+	// 	Buttons
+		$randomPalette = $(".random-palette"),
+		$exampleToggle = $(".example-toggle"),
+	// 	Example Page
+		$example = $("#example-page"),
+	//	Background classes
+		$bgPrimary = $example.find(".background-primary"),
+		$bgAccent = $example.find(".background-accent"),
+	//	Color classes
+		$colorAccent = $example.find(".color-accent"),
+		$colorGrayDark = $example.find(".color-gray-dark"),
+	//	Color Tone classes
+		$colorPrimaryTone = $example.find(".color-primary-tone"),
+		$colorAccentTone = $example.find(".color-accent-tone"),
+	//	Button classes
+		$buttonAccent = $example.find(".button-accent");
+		//$color = $example.find(".bg-accent"),
 
-	this.rgb = rgb;
-	this.hex = convert.rgbToHex(rgb);
+
+	// Create palette
+	var palette = new Palette("rgb(14, 72, 224)");
+
+	// Set colors on init
+	setColors();
+	setText();
+
+	function setColors() {
+		// Set palette CSS
+		$primary.css("background", palette.primary);
+		$accent.css("background", palette.accent);
+		$grayLight.css("background", palette.grayLight);
+		$grayDark.css("background", palette.grayDark);
+
+		$primary.css("color", palette.primaryTone);
+		$accent.css("color", palette.accentTone);
+		$grayLight.css("color", palette.grayLightTone);
+		$grayDark.css("color", palette.grayDarkTone);
+
+		// Set example page CSS
+		$bgPrimary.css("background", palette.primary);
+		$bgAccent.css("background", palette.accent);
+		$example.css("background", palette.grayLight);
+
+		$colorAccent.css("color", palette.accent);
+		$colorGrayDark.css("color", palette.grayDark);
+
+		$buttonAccent.css("background", palette.accent);
+		$buttonAccent.css("border-color", palette.accent);
+
+		$colorPrimaryTone.css("color", palette.primaryTone);
+		$colorAccentTone.css("color", palette.accentTone);
+	}
+
+	function setText() {
+		$primaryHex.text(palette.primaryHex);
+		$accentHex.text(palette.accentHex);
+		$grayLightHex.text(palette.grayLightHex);
+		$grayDarkHex.text(palette.grayDarkHex);
+	}
+
+	// randomPalette Bind events
+	$randomPalette.click(function(){
+		palette = new Palette(random.rgb());
+		setColors();
+		setText();
+	});
+
+	// Show example site on click
+	$exampleToggle.click(function(){
+		$example.fadeToggle("fast");
+	});
+
+})()
+
+},{"./convert.js":3,"./palette.js":5,"./random.js":6,"./validate.js":7,"jQuery":1}],5:[function(require,module,exports){
+var convert = require('./convert.js');
+var validate = require('./validate.js');
+
+module.exports = function(color) {
+
+	if ( validate.hex(color) ) {
+		this.hex = color;
+		this.rgb = convert.hexToRgb(color);
+	} else {
+		this.rgb = color;
+		this.hex = convert.rgbToHex(color);
+	}
 
 	this.primary = this.rgb;
-	this.accent = convert.rgbToAccent(rgb);
-	this.grayLight = convert.rgbToGray(rgb, "light");
-	this.grayDark = convert.rgbToGray(rgb, "dark");
+	this.accent = convert.rgbToAccent(this.rgb);
+	this.grayLight = convert.rgbToGray(this.rgb, "light");
+	this.grayDark = convert.rgbToGray(this.rgb, "dark");
 
-	this.primaryColor = convert.rgbToTone(this.primary);
-	this.accentColor = convert.rgbToTone(this.accent);
-	this.grayLightColor = convert.rgbToTone(this.grayLight);
-	this.grayDarkColor = convert.rgbToTone(this.grayDark);
+	this.primaryTone = convert.rgbToTone(this.primary, this.grayDark);
+	this.accentTone = convert.rgbToTone(this.accent, this.grayDark);
+	this.grayLightTone = convert.rgbToTone(this.grayLight, this.grayDark);
+	this.grayDarkTone = convert.rgbToTone(this.grayDark, this.grayDark);
 
+	this.primaryHex = convert.rgbToHex(this.primary);
+	this.accentHex = convert.rgbToHex(this.accent);
+	this.grayLightHex = convert.rgbToHex(this.grayLight);
+	this.grayDarkHex = convert.rgbToHex(this.grayDark);
 };
-},{"./convert.js":3}],5:[function(require,module,exports){
+},{"./convert.js":3,"./validate.js":7}],6:[function(require,module,exports){
 module.exports = (function() {
 
 	/* Private function : returns random number between min and max
@@ -10106,7 +10153,7 @@ module.exports = (function() {
 	}
 
 })();
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 module.exports = (function() {
 
 	/* Public function : test whether string is valid hex

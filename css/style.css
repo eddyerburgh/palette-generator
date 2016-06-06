@@ -1,4 +1,4 @@
-.btn {
+.btn-rounded {
   padding: .4rem 3rem;
   border-radius: 2rem !important; }
 
@@ -11,9 +11,11 @@ body {
   top: 0;
   right: 0;
   left: 0;
-  background: #fff;
   min-height: 100%;
   z-index: 9999; }
+
+.card {
+  border: none; }
 
 html,
 body,
