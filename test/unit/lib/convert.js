@@ -21,18 +21,12 @@ describe('rgbToHex', () => {
   });
 });
 
-describe.skip('RGB to Accent', () => {
-  it('convert.rgbToAccent("rgb(25, 69, 32)") should equal "rgb(69,25,62)"', () => {
-    expect(convert.rgbToAccent('rgb(25, 69, 32)')).to.equal('rgb(69,25,62)');
+describe('RGB to Accent', () => {
+  it('returns RGB of accent color when passed RGB input', () => {
+    expect(convert.rgbToAccent('rgb(255,255,0)')).to.equal('rgb(0,0,255)');
   });
-  it('convert.rgbToAccent("rgb(217, 157, 54)") should equal "rgb(54,114,217)"', () => {
-    expect(convert.rgbToAccent('rgb(217, 157, 54)')).to.equal('rgb(54,114,217)');
-  });
-  it('convert.rgbToAccent("rgb(177, 150, 214)") should equal "rgb(187,214,150)"', () => {
-    expect(convert.rgbToAccent('rgb(177, 150, 214)')).to.equal('rgb(187,214,150)');
-  });
-  it('r) should be false', () => {
-    expect(convert.rgbToAccent('r)')).to.be.false;
+  it('should throw an error if given incorrect input', () => {
+    expect(() => { convert.rgbToAccent('r)'); }).to.throw(Error);
   });
 });
 

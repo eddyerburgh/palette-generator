@@ -100,7 +100,7 @@ function rgbToHex(rgb) {
  */
 function rgbToAccent(rgb) {
   if (!(validate.validateRgb(rgb))) {
-    return false;
+    throw new Error('rgbToAccent must be passed a valid RGB value!');
   }
 
   const rgbArray = rgbToArray(rgb);
