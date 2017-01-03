@@ -73,25 +73,27 @@ function rgbToHsl(red, green, blue) {
   return [h, s, l];
 }
 
-/* Private function : convert rgb to array with each value
+/* Private function : convert rgb to array of each color value
  * @param [String] : rgb value
  * @return [Array] : array [orignal value, r, g, b]
  */
 function rgbToArray(rgb) {
-  return rgb.match(/^rgba?[\s+]?\([\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?,[\s+]?(\d+)[\s+]?/i);
+  const strippedRgb = rgb.replace(/^\s+|\s+$/g, '');
+  const rgbArray = strippedRgb.replace(/[^\d,]/g, '').split(',');
+  return rgbArray.map(value => parseInt(value, 10));
 }
 
 function rgbToHex(rgb) {
   if (!(validate.validateRgb(rgb))) {
-    return false;
+    throw new Error('rgbToHex must be passed a valid RGB value');
   }
 
   const rgbArray = rgbToArray(rgb);
 
-  return (rgbArray && rgbArray.length === 4) ? `#${
-    (`0${parseInt(rgbArray[1], 10).toString(16)}`).slice(-2)
-    }${(`0${parseInt(rgbArray[2], 10).toString(16)}`).slice(-2)
-    }${(`0${parseInt(rgbArray[3], 10).toString(16)}`).slice(-2)}` : '';
+  return `#${[rgbArray[0], rgbArray[1], rgbArray[2]].map((x) => {
+    const hex = x.toString(16);
+    return hex.length === 1 ? `0${ hex}` : hex;
+  }).join('')}`;
 }
 
 /* Public function : Converts RGB to hex
@@ -100,7 +102,7 @@ function rgbToHex(rgb) {
  */
 function rgbToAccent(rgb) {
   if (!(validate.validateRgb(rgb))) {
-    throw new Error('rgbToAccent must be passed a valid RGB value!');
+    throw new Error('rgbToAccent must be passed a valid RGB value');
   }
 
   const rgbArray = rgbToArray(rgb);
@@ -110,7 +112,7 @@ function rgbToAccent(rgb) {
 
   if (h > 1) { h -= 1; }
   const shiftedRgbArray = hslToRgb(h, hsl[1], hsl[2]);
-  return `rgb(${shiftedRgbArray[0]},${shiftedRgbArray[1]},${shiftedRgbArray[2]})`;
+  return `rgb(${shiftedRgbArray[0]}, ${shiftedRgbArray[1]}, ${shiftedRgbArray[2]})`;
 }
 
 /* Public function : Converts RGB to gray
@@ -130,7 +132,7 @@ function rgbToGray(rgb, shade) {
   const s = 0;
   const l = shade === 'dark' ? 0.1 : 0.85;
   const shiftedRgbArray = hslToRgb(h, s, l);
-  return `rgb(${shiftedRgbArray[0]},${shiftedRgbArray[1]},${shiftedRgbArray[2]})`;
+  return `rgb(${shiftedRgbArray[0]}, ${shiftedRgbArray[1]}, ${shiftedRgbArray[2]})`;
 }
 
 /* Public function : Returns black or white hex depending on rgb tone
