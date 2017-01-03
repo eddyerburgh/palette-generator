@@ -1,20 +1,24 @@
-# Palette Generator
+# palette-generator
 
-A tool to randomly generate palettes with shades of your primary color, gray colors and an accent.
+> A Vue.js project
 
-## Usage
+## Build Setup
 
-Download and run 
-```
+``` bash
+# install dependencies
 npm install
+
+# serve with hot reload at localhost:8080
+npm run dev
+
+# build for production with minification
+npm run build
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
 ```
 
-This will install your dependencies.
-
-## Support
-
-Please [open an issue](https://github.com/eddyerburgh/palette-generator/issues/new) for support.
-
-## Contributing
-
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/eddyerburgh/palette-generator/compare/).
+For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

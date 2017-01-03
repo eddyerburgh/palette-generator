@@ -1,9 +1,4 @@
-# System files
-**.swp
-*.sw*
 .DS_Store
-
-# Dependencies
 node_modules/
 
 # Editor files
@@ -15,6 +10,5 @@ node_modules/
 
 # Log files
 *.log
+test/e2e/reports
 
-# Build
-dist/
