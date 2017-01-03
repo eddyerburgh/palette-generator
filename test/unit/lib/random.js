@@ -1,11 +1,9 @@
-var expect = require('chai').expect;
-var validate = require('../../../src/lib/validate.js');
-var random = require('../../../src/lib/random.js');
+const expect = require('chai').expect;
+const validate = require('../../../src/lib/validate.js');
+const random = require('../../../src/lib/random.js');
 
-describe('random RGB', function() {
-	
-  it('validate.validateRgb(random.randRgb()) should evaluate as true', function(){
-  	expect(validate.validateRgb(random.randRgb())).to.be.true;
+describe('random RGB', () => {
+  it('validate.validateRgb(random.randRgb()) should evaluate as true', () => {
+    expect(validate.validateRgb(random.randRgb())).to.be.true;
   });
-
 });

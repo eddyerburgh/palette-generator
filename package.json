@@ -6,10 +6,10 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run e2e",
+    "test": "npm run lint:fix && npm run test:unit && npm run test:e2e",
+    "test:e2e": "node test/e2e/runner.js",
     "test:unit": "mocha --recursive test/unit",
-    "lint": "eslint --ext .js,.vue src test/e2e/specs",
+    "lint": "eslint --ext .js,.vue src test",
     "lint:fix": "npm run lint -- --fix"
   },
   "dependencies": {
