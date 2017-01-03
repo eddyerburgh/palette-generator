@@ -40,7 +40,7 @@ function hslToRgb(h, s, l) {
   return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
 
-/* Private function : Converts r,g and b values to HSL
+/* Private function : Converts r,g and b values to HSL values in range 0-1
  * @param   [Number]  r       The red color value
  * @param   [Number]  g       The green color value
  * @param   [Number]  b       The blue color value
@@ -115,24 +115,20 @@ function rgbToAccent(rgb) {
 
 /* Public function : Converts RGB to gray
  * @param [String] rgb : rgb value
- * @param [String] shade : light outputs light color
+ * @param [String] shade : dark outputs dark color
  * @return [String] : random rgb value
  */
 function rgbToGray(rgb, shade) {
   if (!(validate.validateRgb(rgb))) {
-    return false;
+    throw new Error('rgbToGray must be passed a valid RGB value');
   }
 
   const rgbArray = rgbToArray(rgb);
     // Get HSL value as array
   const hsl = rgbToHsl(rgbArray[1], rgbArray[2], rgbArray[3]);
   const h = hsl[0];
-  let s = hsl[1];
-  let l = hsl[2];
-  l = shade === 'dark' ? 0.1 : 0.935;
-  if (shade === 'dark') {
-    s -= s / 1.5;
-  }
+  const s = 0;
+  const l = shade === 'dark' ? 0.1 : 0.85;
   const shiftedRgbArray = hslToRgb(h, s, l);
   return `rgb(${shiftedRgbArray[0]},${shiftedRgbArray[1]},${shiftedRgbArray[2]})`;
 }

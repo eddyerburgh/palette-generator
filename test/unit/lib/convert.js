@@ -25,20 +25,20 @@ describe('RGB to Accent', () => {
   it('returns RGB of accent color when passed RGB input', () => {
     expect(convert.rgbToAccent('rgb(255,255,0)')).to.equal('rgb(0,0,255)');
   });
-  it('should throw an error if given incorrect input', () => {
-    expect(() => { convert.rgbToAccent('r)'); }).to.throw(Error);
+  it('throws an error if input is not a valid RGB value', () => {
+    expect(() => convert.rgbToAccent('r)')).to.throw(Error);
   });
 });
 
-describe.skip('RGB to Gray', () => {
-  it('convert.rgbToGray("rgb(158, 86, 183)", "dark") should equal "rgb(23, 11, 27)"', () => {
-    expect(convert.rgbToGray('rgb(158, 86, 183)', 'dark')).to.equal('rgb(27,22,29)');
+describe('RGB to Gray', () => {
+  it('returns RGB of RGB input with saturation 0 and lightness 10% if shade is set to dark', () => {
+    expect(convert.rgbToGray('rgb(255, 255, 0)', 'dark')).to.equal('rgb(26,26,26)');
   });
-  it('convert.rgbToGray("rgb(158, 86, 183)", "light") should equal "rgb(242,232,245)"', () => {
-    expect(convert.rgbToGray('rgb(158, 86, 183)', 'light')).to.equal('rgb(242,232,245)');
+  it('returns RGB of RGB input with saturation 0 and lightness 85% if shade is not set', () => {
+    expect(convert.rgbToGray('rgb(255, 255, 0)')).to.equal('rgb(217,217,217)');
   });
-  it('r) should be false', () => {
-    expect(convert.rgbToGray('r)')).to.be.false;
+  it('throws an error if input is not a valid RGB value', () => {
+    expect(() => convert.rgbToGray('r)')).to.throw(Error);
   });
 });
 
