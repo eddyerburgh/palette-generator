@@ -135,30 +135,32 @@ function rgbToGray(rgb, shade) {
   return `rgb(${shiftedRgbArray[0]}, ${shiftedRgbArray[1]}, ${shiftedRgbArray[2]})`;
 }
 
-/* Public function : Returns black or white hex depending on rgb tone
+/* Public function : Returns dark or white rgb depending on rgb tone
+ * Dark color is rgb(0,0,0) by default, but can be set with args param
  * @param [String] rgb : rgb value
- * @param [String] shade : light outputs light color
+ * @param [Object] args :
+ * args.darkColor [String] : optional value for dark color (rgb(0,0,0) by default
  * @return [String] : random rgb value
  */
-function rgbToTone(rgb, gray) {
+function rgbToToneRgb(rgb, args) {
   if (!(validate.validateRgb(rgb))) {
-    throw new Error('rgbToTone must be passed a valid RGB value');
+    throw new Error('rgbToToneRgb must be passed a valid RGB value');
   }
-
-    // Split rgb
+  const darkColor = args && args.darkColor || 'rgb(0, 0, 0)';
+  // Split rgb
   const rgbArray = rgbToArray(rgb);
 
   let brightness;
-  brightness = (rgbArray[1] * 299) + (rgbArray[2] * 587) + (rgbArray[3] * 114);
+  brightness = (rgbArray[0] * 299) + (rgbArray[1] * 587) + (rgbArray[2] * 114);
   brightness /= 255000;
 
     // values range from 0 to 1
     // anything greater than 0.5 should be bright enough for dark text
   if (brightness >= 0.5) {
-    return gray;
+    return darkColor;
   }
 
-  return '#fff';
+  return 'rgb(255, 255, 255)';
 }
 
 /* Public function : Converts hex to rgb value
@@ -179,5 +181,5 @@ module.exports = {
   rgbToAccent,
   rgbToGray,
   rgbToHex,
-  rgbToTone,
+  rgbToToneRgb,
 };

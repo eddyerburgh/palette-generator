@@ -35,19 +35,26 @@ describe('convert', () => {
   });
 
   describe('RGB to Tone', () => {
-    it('convert.rgbToTone("rgb(0,0,0)") should equal "#fff"', () => {
-      expect(convert.rgbToTone('rgb(0,0,0)')).to.equal('#fff');
+    it('returns rgb(255, 255, 255) when passed color with lightness < 0.5', () => {
+      expect(convert.rgbToToneRgb('rgb(0,0,0)')).to.equal('rgb(255, 255, 255)');
     });
-    it('r) should be false', () => {
-      expect(() => convert.rgbToTone('r)')).to.throw(/rgbToTone must be passed a valid RGB value/);
+    it('returns rgb(0, 0, 0) when passed color with lightness > 0.5 ', () => {
+      expect(convert.rgbToToneRgb('rgb(255,255,0)')).to.equal('rgb(0, 0, 0)');
+    });
+    it('returns args.darkColor when passed color with lightness > 0.5 ', () => {
+      const darkColor = 'rgb(244, 244, 244)';
+      expect(convert.rgbToToneRgb('rgb(255,255,0)', { darkColor })).to.equal(darkColor);
+    });
+    it('returns an error if first argument is not valid rgb', () => {
+      expect(() => convert.rgbToToneRgb('r)')).to.throw(/rgbToToneRgb must be passed a valid RGB value/);
     });
   });
 
   describe('Hex to RGB', () => {
-    it('should return an RGB value when passed a hex code', () => {
-      expect(convert.hexToRgb('#vuexffff00')).to.equal('rgb(255,255,0)');
+    it('returns an RGB value when passed a hex code', () => {
+      expect(convert.hexToRgb('#ffff00')).to.equal('rgb(255,255,0)');
     });
-    it('should return an RGB value when passed a 3 lettter shorthand hex code', () => {
+    it('returns an RGB value when passed a 3 lettter shorthand hex code', () => {
       expect(convert.hexToRgb('#fff')).to.equal('rgb(255,255,255)');
     });
   });
