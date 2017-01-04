@@ -12,9 +12,14 @@ describe('convert', () => {
       expect(() => convert.rgbToHex('r)')).to.throw(/rgbToHex must be passed a valid RGB value/);
     });
   });
-
+  describe('hslToRgb', () => {
+    it('returns the correct RGB of HSL values in range 0-1', () => {
+      expect(convert.hslToRgb(0.736, 0.544, 0.527)).to.deep.equal([123, 69, 200]);
+    });
+  });
   describe('RGB to Accent', () => {
     it('returns RGB of accent color when passed RGB input', () => {
+      expect(convert.rgbToAccent('rgb(123,69,200)')).to.equal('rgb(146, 200, 69)');
       expect(convert.rgbToAccent('rgb(255, 255, 0)')).to.equal('rgb(0, 0, 255)');
     });
     it('throws an error if input is not a valid RGB value', () => {
