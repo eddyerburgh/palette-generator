@@ -9,7 +9,7 @@ function rand(min, max) {
 /* Public function : Returns random RGB value
  * @return [String] : random rgb value
  */
-function randRgb() {
+function randomRgb() {
   const r = rand(0, 255);
   const g = rand(0, 255);
   const b = rand(0, 255);
@@ -18,6 +18,6 @@ function randRgb() {
 }
 
 module.exports = {
-  randRgb,
+  randomRgb,
 };
 

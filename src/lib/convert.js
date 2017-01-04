@@ -9,6 +9,7 @@ function hue2rgb(p, q, t) {
   if (t < 1 / 6) return p + (q - p) * 6 * tone;
   if (t < 1 / 2) return q;
   if (t < 2 / 3) return p + (q - p) * (2 / 3 - tone) * 6;
+  if (t < 2 / 3) return p + (q - p) * (2 / 3 - tone) * 6;
   return p;
 }
 
