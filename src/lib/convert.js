@@ -107,7 +107,7 @@ function rgbToAccent(rgb) {
 
   const rgbArray = rgbToArray(rgb);
     // Get HSL value as array
-  const hsl = rgbToHsl(rgbArray[1], rgbArray[2], rgbArray[3]);
+  const hsl = rgbToHsl(rgbArray[0], rgbArray[1], rgbArray[2]);
   let h = hsl[0] + 0.5;
 
   if (h > 1) { h -= 1; }
@@ -142,7 +142,7 @@ function rgbToGray(rgb, shade) {
  */
 function rgbToTone(rgb, gray) {
   if (!(validate.validateRgb(rgb))) {
-    return false;
+    throw new Error('rgbToTone must be passed a valid RGB value');
   }
 
     // Split rgb
