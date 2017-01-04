@@ -1,19 +1,18 @@
 import { randomRgb } from '../../lib/random';
 import generatePalette from '../../lib/generate-palette';
 
-// initial state
-const state = {
+const initialState = {
   palette: {
-    primary: null,
-    secondary: null,
-    grayLight: null,
-    grayDark: null,
+    rgb: null,
+    hex: null,
+    tone: null,
   },
-  checkoutStatus: null,
 };
 
 // getters
-const getters = {};
+const getters = {
+  palette: state => state.palette,
+};
 
 // actions
 const actions = {
@@ -26,13 +25,13 @@ const actions = {
 
 // mutations
 const mutations = {
-  updatePalette(palette) {
-    state.palette = palette;
+  updatePalette(state, palette) {
+    state.palette = palette; // eslint-disable-line no-param-reassign
   },
 };
 
 export default {
-  state,
+  state: initialState,
   getters,
   actions,
   mutations,

@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <hello></hello>
+    <palette />
+    <generatePalette />
   </div>
 </template>
 
 <script>
-import Hello from './components/Hello';
+import GeneratePalette from './components/GeneratePalette';
+import Palette from './components/Palette';
 
 export default {
   name: 'app',
   components: {
-    Hello,
+    GeneratePalette,
+    Palette,
   },
 };
 </script>
