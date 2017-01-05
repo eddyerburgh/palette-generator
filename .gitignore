@@ -10,5 +10,5 @@ node_modules/
 
 # Log files
 *.log
-test/e2e/reports
+reports
 coverage
