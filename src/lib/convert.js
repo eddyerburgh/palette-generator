@@ -1,4 +1,7 @@
 /* eslint-disable no-mixed-operators */
+
+import checkInput from 'check-input';
+
 const validate = require('./validate.js');
 
 function hue2rgb(p, q, t) {
@@ -117,20 +120,34 @@ function rgbToAccent(rgb) {
 
 /* Public function : Converts RGB to gray
  * @param [String] rgb : rgb value
- * @param [String] shade : dark outputs dark color
+ * @param [Object] options
+ * options.saturation [Number] : value between 0 and 1 of saturation level
+ * options.lightness [Number] : value between 0 and 1 of lightness level
  * @return [String] : random rgb value
  */
-function rgbToGray(rgb, shade) {
+function rgbToGray(rgb, options = {}) {
   if (!(validate.validateRgb(rgb))) {
     throw new Error('rgbToGray must be passed a valid RGB value');
   }
 
+  if (options.saturation !== undefined) {
+    checkInput.isNumber(options.saturation, { errorMessage: 'args.saturation must be a number' });
+  }
+
+  if (options.lightness !== undefined) {
+    checkInput.isNumber(options.lightness, { errorMessage: 'args.lightness must be a number' });
+  }
+
+  const parsedOptions = Object.assign({}, { saturation: 0.05, lightness: 0.1 }, options);
+
   const rgbArray = rgbToArray(rgb);
     // Get HSL value as array
-  const hsl = rgbToHsl(rgbArray[1], rgbArray[2], rgbArray[3]);
+  const hsl = rgbToHsl(rgbArray[0], rgbArray[1], rgbArray[2]);
   const h = hsl[0];
-  const s = 0;
-  const l = shade === 'dark' ? 0.1 : 0.85;
+  const s = parsedOptions.saturation;
+  const l = parsedOptions.lightness;
+
+
   const shiftedRgbArray = hslToRgb(h, s, l);
   return `rgb(${shiftedRgbArray[0]}, ${shiftedRgbArray[1]}, ${shiftedRgbArray[2]})`;
 }

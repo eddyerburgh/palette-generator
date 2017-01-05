@@ -7,19 +7,19 @@ describe('generatePalette', () => {
       rgb: {
         primary: 'rgb(255, 0, 0)',
         accent: 'rgb(0, 255, 255)',
-        grayLight: 'rgb(217, 217, 217)',
-        grayDark: 'rgb(26, 26, 26)',
+        grayLight: 'rgb(231, 228, 228)',
+        grayDark: 'rgb(40, 36, 36)',
       },
       tone: {
         primary: 'rgb(255, 255, 255)',
-        accent: 'rgb(26, 26, 26)',
-        grayLight: 'rgb(26, 26, 26)',
+        accent: 'rgb(40, 36, 36)',
+        grayLight: 'rgb(40, 36, 36)',
         grayDark: 'rgb(255, 255, 255)',
       },
       hex: {
         accent: '#00ffff',
-        grayDark: '#1a1a1a',
-        grayLight: '#d9d9d9',
+        grayDark: '#282424',
+        grayLight: '#e7e4e4',
         primary: '#ff0000',
       },
     };

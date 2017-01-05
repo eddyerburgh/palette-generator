@@ -28,11 +28,24 @@ describe('convert', () => {
   });
 
   describe('RGB to Gray', () => {
-    it('returns RGB of RGB input with saturation 0 and lightness 10% if shade is set to dark', () => {
-      expect(convert.rgbToGray('rgb(255, 255, 0)', 'dark')).to.equal('rgb(26, 26, 26)');
+    it('returns an RGB value with saturation 0.05 and lightness 0.1 when passed RGB and no args', () => {
+      expect(convert.rgbToGray('rgb(255, 0, 0)')).to.equal('rgb(27, 24, 24)');
     });
-    it('returns RGB of RGB input with saturation 0 and lightness 85% if shade is not set', () => {
-      expect(convert.rgbToGray('rgb(255, 255, 0)')).to.equal('rgb(217, 217, 217)');
+    it('returns an RGB value with saturation options.saturation and lightness 0.1 if arg.lightness is undefined', () => {
+      expect(convert.rgbToGray('rgb(255, 0, 0)', { saturation: 1 })).to.equal('rgb(51, 0, 0)');
+    });
+    it('returns an RGB value with saturation options.saturation and lightness args.lightness', () => {
+      expect(convert.rgbToGray('rgb(255, 0, 0)', { saturation: 1, lightness: 0.5 })).to.equal('rgb(255, 0, 0)');
+    });
+    it('throws an error if options.saturation is not a number', () => {
+      ['NaN', NaN, null, {}, [], false].forEach((invalidInput) => {
+        expect(() => convert.rgbToGray('rgb(255,0,0)', { saturation: invalidInput })).to.throw(Error);
+      });
+    });
+    it('throws an error if options.lightness is not a number', () => {
+      ['NaN', NaN, null, {}, [], false].forEach((invalidInput) => {
+        expect(() => convert.rgbToGray('rgb(255,0,0)', { lightness: invalidInput })).to.throw(Error);
+      });
     });
     it('throws an error if input is not a valid RGB value', () => {
       expect(() => convert.rgbToGray('r)')).to.throw(/rgbToGray must be passed a valid RGB value/);
