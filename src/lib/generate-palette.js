@@ -17,7 +17,7 @@ export default function generatePalette(color) {
   }
 
   palette.rgb.accent = convert.rgbToAccent(palette.rgb.primary);
-  palette.rgb.grayLight = convert.rgbToGray(palette.rgb.primary, { lightness: 0.9 });
+  palette.rgb.grayLight = convert.rgbToGray(palette.rgb.primary, { lightness: 0.95 });
   palette.rgb.grayDark = convert.rgbToGray(palette.rgb.primary, { lightness: 0.15 });
 
   palette.hex.accent = convert.rgbToHex(palette.rgb.accent);

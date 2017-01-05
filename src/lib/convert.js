@@ -138,7 +138,7 @@ function rgbToGray(rgb, options = {}) {
     checkInput.isNumber(options.lightness, { errorMessage: 'args.lightness must be a number' });
   }
 
-  const parsedOptions = Object.assign({}, { saturation: 0.05, lightness: 0.1 }, options);
+  const parsedOptions = Object.assign({}, { saturation: 0.15, lightness: 0.1 }, options);
 
   const rgbArray = rgbToArray(rgb);
     // Get HSL value as array

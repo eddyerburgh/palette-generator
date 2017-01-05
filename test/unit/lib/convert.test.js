@@ -28,8 +28,8 @@ describe('convert', () => {
   });
 
   describe('RGB to Gray', () => {
-    it('returns an RGB value with saturation 0.05 and lightness 0.1 when passed RGB and no args', () => {
-      expect(convert.rgbToGray('rgb(255, 0, 0)')).to.equal('rgb(27, 24, 24)');
+    it('returns an RGB value with saturation 0.15 and lightness 0.1 when passed RGB and no args', () => {
+      expect(convert.rgbToGray('rgb(255, 0, 0)')).to.equal('rgb(29, 22, 22)');
     });
     it('returns an RGB value with saturation options.saturation and lightness 0.1 if arg.lightness is undefined', () => {
       expect(convert.rgbToGray('rgb(255, 0, 0)', { saturation: 1 })).to.equal('rgb(51, 0, 0)');
