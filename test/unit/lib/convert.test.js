@@ -1,5 +1,5 @@
-const expect = require('chai').expect;
-const convert = require('../../../src/lib/convert.js');
+import { expect } from 'chai';
+import * as convert from '../../../src/lib/convert';
 
 describe('convert', () => {
   describe('rgbToHex', () => {

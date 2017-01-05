@@ -2,9 +2,9 @@
 
 import checkInput from 'check-input';
 
-const validate = require('./validate.js');
+import { isValidRgb } from './validators';
 
-function hue2rgb(p, q, t) {
+export function hueTorgb(p, q, t) {
   if (t < 0) t += 1; // eslint-disable-line no-param-reassign
   if (t > 1) t -= 1; // eslint-disable-line no-param-reassign
   if (t < 1 / 6) return p + (q - p) * 6 * t;
@@ -13,7 +13,7 @@ function hue2rgb(p, q, t) {
   return p;
 }
 
-/* Converts an HSL color value to RGB. Conversion formula
+/* converts an HSL color value to RGB. Conversion formula
  * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
  * Assumes h, s, and l are contained in the set [0, 1] and
  * returns r, g, and b in the set [0, 255].
@@ -23,7 +23,7 @@ function hue2rgb(p, q, t) {
  * @param   [Number]  l       The lightness
  * @return  [Array]           The RGB representation
  */
-function hslToRgb(h, s, l) {
+export function hslToRgb(h, s, l) {
   let r;
   let g;
   let b;
@@ -34,20 +34,20 @@ function hslToRgb(h, s, l) {
     const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
 
-    r = hue2rgb(p, q, h + 1 / 3);
-    g = hue2rgb(p, q, h);
-    b = hue2rgb(p, q, h - 1 / 3);
+    r = hueTorgb(p, q, h + 1 / 3);
+    g = hueTorgb(p, q, h);
+    b = hueTorgb(p, q, h - 1 / 3);
   }
 
   return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
 }
-/* Private function : Converts r,g and b values to HSL values in range 0-1
+/* converts r,g and b values to HSL values in range 0-1
  * @param   [Number]  r       The red color value
  * @param   [Number]  g       The green color value
  * @param   [Number]  b       The blue color value
  * @return  [Array]           The HSL representation
  */
-function rgbToHsl(red, green, blue) {
+export function rgbToHsl(red, green, blue) {
   const r = red / 255;
   const g = green / 255;
   const b = blue / 255;
@@ -74,7 +74,7 @@ function rgbToHsl(red, green, blue) {
   return [h, s, l];
 }
 
-/* Private function : convert rgb to array of each color value
+/* converts rgb to array of each color value
  * @param [String] : rgb value
  * @return [Array] : array [orignal value, r, g, b]
  */
@@ -84,8 +84,8 @@ function rgbToArray(rgb) {
   return rgbArray.map(value => parseInt(value, 10));
 }
 
-function rgbToHex(rgb) {
-  if (!(validate.validateRgb(rgb))) {
+export function rgbToHex(rgb) {
+  if (!(isValidRgb(rgb))) {
     throw new Error('rgbToHex must be passed a valid RGB value');
   }
 
@@ -97,12 +97,12 @@ function rgbToHex(rgb) {
   }).join('')}`;
 }
 
-/* Public function : Converts RGB to hex
+/* converts RGB to hex
  * @param [String] rgb : rgb value
  * @return [String] : random rgb value
  */
-function rgbToAccent(rgb) {
-  if (!(validate.validateRgb(rgb))) {
+export function rgbToAccent(rgb) {
+  if (!(isValidRgb(rgb))) {
     throw new Error('rgbToAccent must be passed a valid RGB value');
   }
 
@@ -118,15 +118,15 @@ function rgbToAccent(rgb) {
   return `rgb(${shiftedRgbArray[0]}, ${shiftedRgbArray[1]}, ${shiftedRgbArray[2]})`;
 }
 
-/* Public function : Converts RGB to gray
+/* converts RGB to gray
  * @param [String] rgb : rgb value
  * @param [Object] options
  * options.saturation [Number] : value between 0 and 1 of saturation level
  * options.lightness [Number] : value between 0 and 1 of lightness level
  * @return [String] : random rgb value
  */
-function rgbToGray(rgb, options = {}) {
-  if (!(validate.validateRgb(rgb))) {
+export function rgbToGray(rgb, options = {}) {
+  if (!(isValidRgb(rgb))) {
     throw new Error('rgbToGray must be passed a valid RGB value');
   }
 
@@ -152,15 +152,15 @@ function rgbToGray(rgb, options = {}) {
   return `rgb(${shiftedRgbArray[0]}, ${shiftedRgbArray[1]}, ${shiftedRgbArray[2]})`;
 }
 
-/* Public function : Returns dark or white rgb depending on rgb tone
+/* returns dark or white rgb depending on rgb tone
  * Dark color is rgb(0,0,0) by default, but can be set with args param
  * @param [String] rgb : rgb value
  * @param [Object] args :
  * args.darkColor [String] : optional value for dark color (rgb(0,0,0) by default
  * @return [String] : random rgb value
  */
-function rgbToToneRgb(rgb, args) {
-  if (!(validate.validateRgb(rgb))) {
+export function rgbToToneRgb(rgb, args) {
+  if (!(isValidRgb(rgb))) {
     throw new Error('rgbToToneRgb must be passed a valid RGB value');
   }
   const darkColor = args && args.darkColor || 'rgb(0, 0, 0)';
@@ -180,11 +180,11 @@ function rgbToToneRgb(rgb, args) {
   return 'rgb(255, 255, 255)';
 }
 
-/* Public function : Converts hex to rgb value
+/* converts hex to rgb value
  * @param [String] hex : hex value
  * @return [String] : rgb value
  */
-function hexToRgb(hex) {
+export function hexToRgb(hex) {
   const hexArray = hex.replace('#', '');
   return `rgb(${(hexArray)
         .match(new RegExp(`(.{${hexArray.length / 3}})`, 'g'))
@@ -192,12 +192,3 @@ function hexToRgb(hex) {
         .join(',')})`;
 }
 
-
-module.exports = {
-  hexToRgb,
-  hslToRgb,
-  rgbToAccent,
-  rgbToGray,
-  rgbToHex,
-  rgbToToneRgb,
-};

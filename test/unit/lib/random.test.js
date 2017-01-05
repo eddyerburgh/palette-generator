@@ -1,9 +1,9 @@
-const expect = require('chai').expect;
-const validate = require('../../../src/lib/validate.js');
-const random = require('../../../src/lib/random.js');
+import { expect } from 'chai';
+import { isValidRgb } from '../../../src/lib/validators';
+import * as random from '../../../src/lib/random';
 
 describe('random RGB', () => {
-  it('validate.validateRgb(random.randomRgb()) should evaluate as true', () => {
-    expect(validate.validateRgb(random.randomRgb())).to.be.true;
+  it('generates a random RGB', () => {
+    expect(isValidRgb(random.randomRgb())).to.be.true;
   });
 });
