@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<button
-						@click="generateRandomPalette()"
-						id="random-palette"
+	<button
+			@click="generateRandomPalette()"
+			id="random-palette"
 		>Generate Random Palette</button>
 	</div>
 </template>
@@ -20,5 +20,8 @@ export default{
 <style>
   button {
     border: 0;
+    padding: 1rem;
+    cursor: pointer;
+    margin-bottom: 1rem;
   }
 </style>

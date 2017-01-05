@@ -1,7 +1,7 @@
 <template>
   <div id="app">
+	  <generatePalette />
     <palette />
-    <generatePalette />
   </div>
 </template>
 
