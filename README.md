@@ -2,6 +2,8 @@
 
 > A Vue.js project
 
+See it live [here](http://eddyerburgh.github.io/palette-generator/)
+
 ## Build Setup
 
 ``` bash
