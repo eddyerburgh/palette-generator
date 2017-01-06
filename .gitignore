@@ -12,3 +12,6 @@ node_modules/
 *.log
 reports
 coverage
+
+# Build
+dist
