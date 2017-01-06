@@ -26,8 +26,7 @@ export default{
 <style>
   .palette{
     width: 100%;
-    height: 60vh;
-    max-width: 1200px;
+    height: 50vh;
     margin: 0 auto;
   }
 </style>

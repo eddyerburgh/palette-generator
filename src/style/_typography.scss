@@ -1,0 +1,15 @@
+body {
+  font: #{$font-weight-base} #{$font-size-base}/#{$line-height-base} $basefont;
+  color: $body-color;
+}
+
+p {
+  line-height: 1.5em;
+  margin-bottom: 1em;
+}
+
+h1 {
+  font-size: $font-size-base * 2;
+  line-height: $line-height-base;
+  margin-bottom: 1em;
+};

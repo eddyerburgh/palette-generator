@@ -6,6 +6,5 @@ Function.prototype.bind = require('function-bind');
 const testsContext = require.context('./', true, /\.test/);
 testsContext.keys().forEach(testsContext);
 
-
-const srcContext = require.context('src', true);
+const srcContext = require.context('src', true, /^\.\/(?!main\.js$).+\.(js|vue)$/i);
 srcContext.keys().forEach(srcContext);

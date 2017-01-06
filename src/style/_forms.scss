@@ -1,0 +1,42 @@
+// prevent input default appearence on webkit
+input,
+textarea {
+  appearance: none;
+}
+
+// Disable webkit background color
+input:-webkit-autofill {
+  box-shadow: 0 0 0 1000px $form-bg-color inset;
+}
+
+input {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  color: $form-text-color;
+  margin-bottom: 0;
+  line-height: 40px;
+  height: 40px;
+  outline: none;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+
+input[type=text] {
+  font-size: $font-size-base;
+  line-height: 1.5em;
+  transition: background-color .2s ease-in-out;
+  border: 0;
+  border: 1px solid $border-color;
+  border-radius: $form-border-radius;
+  box-shadow: none;
+  display: block;
+  font-weight: normal;
+  margin-bottom: 20px;
+
+  :focus {
+    outline: none;
+    border-color: $body-bg;
+  }
+}

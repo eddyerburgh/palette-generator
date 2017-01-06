@@ -1,17 +1,19 @@
 <template>
-  <div>
+  <div class="text-align-center">
     <input
 				    id="generate-palette"
 				    type="text"
 				    placeholder="enter hex or rgb"
 				    @input="generatePaletteIfValidColor"
     />
-    <input
-				    type="submit"
-				    value="generate random palette"
+	  <p>OR</p>
+    <button
             @click="generateRandomPalette()"
             id="random-palette"
+            class="button text-align-center"
     >
+	    generate random palette
+	    </button>
   </div>
 </template>
 
@@ -37,13 +39,3 @@ export default{
   },
 };
 </script>
-
-<style>
-  button {
-    border: 0;
-    padding: 1rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
-  }
-
-</style>

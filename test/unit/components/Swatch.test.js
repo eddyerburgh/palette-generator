@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { expect } from 'chai';
+import 'babel-polyfill';
 import Swatch from '../../../src/components/Swatch';
 
 function getRenderedText(Component, propsData, el) {
