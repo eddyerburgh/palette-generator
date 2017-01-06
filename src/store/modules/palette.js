@@ -21,6 +21,10 @@ const actions = {
     const palette = generatePalette(rgb);
     commit('updatePalette', palette);
   },
+  generatePalette({ commit }, { rgb }) {
+    const palette = generatePalette(rgb);
+    commit('updatePalette', palette);
+  },
 };
 
 // mutations

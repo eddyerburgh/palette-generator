@@ -3,9 +3,6 @@
 
 module.exports = {
   'palette is generated when random-palette button is clicked': function test(browser) {
-    // automatically uses dev Server port from /config.index.js
-    // default: http://localhost:8080
-    // see nightwatch.conf.js
     const devServer = browser.globals.devServerURL;
 
     browser
@@ -18,4 +15,18 @@ module.exports = {
       .assert.elementCount('.swatch', 4)
       .end();
   },
+  'palette is generated when valid hex is typed in input': function test(browser) {
+    const devServer = browser.globals.devServerURL;
+
+    browser
+      .url(devServer)
+      .waitForElementVisible('#app', 10000)
+      .assert.elementPresent('#generate-palette')
+      .assert.elementCount('.swatch', 0)
+      .setValue('#generate-palette', '#fff')
+      .waitForElementVisible('.swatch', 10000)
+      .assert.elementCount('.swatch', 4)
+      .end();
+  },
+
 };
