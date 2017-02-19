@@ -31,22 +31,27 @@ describe('convert', () => {
     it('returns an RGB value with saturation 0.15 and lightness 0.1 when passed RGB and no args', () => {
       expect(convert.rgbToGray('rgb(255, 0, 0)')).to.equal('rgb(29, 22, 22)');
     });
+
     it('returns an RGB value with saturation options.saturation and lightness 0.1 if arg.lightness is undefined', () => {
       expect(convert.rgbToGray('rgb(255, 0, 0)', { saturation: 1 })).to.equal('rgb(51, 0, 0)');
     });
+
     it('returns an RGB value with saturation options.saturation and lightness args.lightness', () => {
       expect(convert.rgbToGray('rgb(255, 0, 0)', { saturation: 1, lightness: 0.5 })).to.equal('rgb(255, 0, 0)');
     });
+
     it('throws an error if options.saturation is not a number', () => {
       ['NaN', NaN, null, {}, [], false].forEach((invalidInput) => {
         expect(() => convert.rgbToGray('rgb(255,0,0)', { saturation: invalidInput })).to.throw(Error);
       });
     });
+
     it('throws an error if options.lightness is not a number', () => {
       ['NaN', NaN, null, {}, [], false].forEach((invalidInput) => {
         expect(() => convert.rgbToGray('rgb(255,0,0)', { lightness: invalidInput })).to.throw(Error);
       });
     });
+
     it('throws an error if input is not a valid RGB value', () => {
       expect(() => convert.rgbToGray('r)')).to.throw(/rgbToGray must be passed a valid RGB value/);
     });
@@ -56,13 +61,16 @@ describe('convert', () => {
     it('returns rgb(255, 255, 255) when passed color with lightness < 0.5', () => {
       expect(convert.rgbToToneRgb('rgb(0,0,0)')).to.equal('rgb(255, 255, 255)');
     });
+
     it('returns rgb(0, 0, 0) when passed color with lightness > 0.5 ', () => {
       expect(convert.rgbToToneRgb('rgb(255,255,0)')).to.equal('rgb(0, 0, 0)');
     });
+
     it('returns args.darkColor when passed color with lightness > 0.5 ', () => {
       const darkColor = 'rgb(244, 244, 244)';
       expect(convert.rgbToToneRgb('rgb(255,255,0)', { darkColor })).to.equal(darkColor);
     });
+
     it('returns an error if first argument is not valid rgb', () => {
       expect(() => convert.rgbToToneRgb('r)')).to.throw(/rgbToToneRgb must be passed a valid RGB value/);
     });
