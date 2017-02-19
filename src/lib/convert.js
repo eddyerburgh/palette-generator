@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-operators */
 
-import checkInput from 'check-input';
+import { isNumber } from 'check-input';
 
 import { isValidRgb } from './validators';
 
@@ -131,11 +131,11 @@ export function rgbToGray(rgb, options = {}) {
   }
 
   if (options.saturation !== undefined) {
-    checkInput.isNumber(options.saturation, { errorMessage: 'args.saturation must be a number' });
+    isNumber(options.saturation, { errorMessage: 'args.saturation must be a number' });
   }
 
   if (options.lightness !== undefined) {
-    checkInput.isNumber(options.lightness, { errorMessage: 'args.lightness must be a number' });
+    isNumber(options.lightness, { errorMessage: 'args.lightness must be a number' });
   }
 
   const parsedOptions = Object.assign({}, { saturation: 0.15, lightness: 0.1 }, options);
