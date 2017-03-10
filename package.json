@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",
-    "avoriaz": "^1.6.0",
+    "avoriaz": "^1.8.3",
     "babel-core": "^6.0.0",
     "babel-eslint": "^7.0.0",
     "babel-loader": "^6.0.0",
@@ -69,6 +69,7 @@
     "selenium-server": "2.53.1",
     "semver": "^5.3.0",
     "shelljs": "^0.7.4",
+    "sinon": "2.0.0-pre.6",
     "style-loader": "^0.13.1",
     "vue-loader": "^10.0.0",
     "vue-style-loader": "^1.0.0",
