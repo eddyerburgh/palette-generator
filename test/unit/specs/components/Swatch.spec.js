@@ -6,7 +6,7 @@ import Swatch from '@/components/Swatch';
 describe('Swatch', () => {
   it('renders propsData.color as text in .swatch-info', () => {
     const color = 'rgb(0, 0, 0)';
-    const wrapper = mount(Swatch, { propsData: { color, tone: 'tone' } });
+    const wrapper = mount(Swatch, { propsData: { color, tone: 'tone', displayColor: true } });
     const swatchInfo = wrapper.find('.swatch-info')[0];
     expect(swatchInfo.text()).to.equal(color);
   });
@@ -16,10 +16,16 @@ describe('Swatch', () => {
     const wrapper = mount(Swatch, { propsData: { color, tone: 'tone' } });
     expect(wrapper.hasStyle('background-color', color)).to.equal(true);
   });
-  it('renders .swatch-info color style to propsData.tone', () => {
+
+  it('renders .swatch-info color style to propsData.tone if props.displayColor is true', () => {
     const tone = 'rgb(0, 0, 0)';
-    const wrapper = mount(Swatch, { propsData: { color: 'red', tone } });
+    const wrapper = mount(Swatch, { propsData: { color: 'red', tone, displayColor: true } });
     const swatchInfo = wrapper.find('.swatch-info')[0];
     expect(swatchInfo.hasStyle('color', tone)).to.equal(true);
+  });
+
+  it('does not .swatch-info color style to propsData.tone if props.displayColor is false', () => {
+    const wrapper = mount(Swatch);
+    expect(wrapper.contains('.swatch-info')).to.equal(false);
   });
 });

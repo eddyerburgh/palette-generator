@@ -48,4 +48,15 @@ describe('Palette.vue', () => {
     });
     expect(wrapper.find('.class-name').length).to.equal(1);
   });
+
+  it('passes props.displayColor to Swatch', () => {
+    const displayColor = true;
+    const wrapper = mount(Palette, {
+      propsData: {
+        displayColor,
+        palette,
+      },
+    });
+    expect(wrapper.find(Swatch)[0].vm.displayColor).to.equal(displayColor);
+  });
 });

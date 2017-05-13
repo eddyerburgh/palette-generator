@@ -1,14 +1,18 @@
 <template>
     <div class="swatch"
          :style="{background: color}">
-        <div class="swatch-info" :style="{color: tone}">{{color}}</div>
+        <div
+          v-if="displayColor"
+          class="swatch-info"
+          :style="{color: tone}"
+        >{{color}}</div>
     </div>
 </template>
 
 <script>
     export default{
-      props: ['color', 'tone'],
       name: 'swatch',
+      props: ['color', 'tone', 'displayColor'],
     };
 </script>
 
