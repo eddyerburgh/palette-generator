@@ -1,17 +1,21 @@
 <template>
-  <div id="app">
-    <div class="container">
-      <div class="col-lg-8 offset-lg-2">
-        <h1 class="text-align-center">Palette Generator</h1>
-        <generate-palette />
-      </div>
-      <palette />
+      <div>
+        <div class="container">
+          <div class="col-lg-8 offset-lg-2">
+            <generate-palette-form />
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <palette />
+        </div>
+        <div class="col-lg-2">
+          <palette />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-  import GeneratePalette from '@/components/GeneratePalette';
+  import GeneratePaletteForm from '@/components/GeneratePaletteForm';
   import Palette from '@/components/Palette';
   import { hexToRgb } from '@/lib/convert';
 
@@ -19,7 +23,7 @@
     name: 'palette-generator',
 
     components: {
-      'generate-palette': GeneratePalette,
+      GeneratePaletteForm,
       palette: Palette,
     },
 
