@@ -3,8 +3,10 @@ import Palette from '@/components/Palette';
 import Swatch from '@/components/Swatch';
 
 describe('Palette.vue', () => {
-  it('renders swatch using props.palette with color and tone', () => {
-    const palette = {
+  let palette;
+
+  beforeEach(() => {
+    palette = {
       rgb: {
         primary: 'rgb(0,0,0)',
         accent: 'rgb(0,0,1)',
@@ -18,6 +20,9 @@ describe('Palette.vue', () => {
         grayDark: 'rgb(0,255,10)',
       },
     };
+  });
+
+  it('renders swatch using props.palette with color and tone', () => {
     const wrapper = mount(Palette, {
       propsData: {
         palette,
@@ -32,5 +37,15 @@ describe('Palette.vue', () => {
     expect(wrapper.find(Swatch)[2].vm.tone).to.equal(palette.tone.grayLight);
     expect(wrapper.find(Swatch)[3].vm.color).to.equal(palette.rgb.grayDark);
     expect(wrapper.find(Swatch)[3].vm.tone).to.equal(palette.tone.grayDark);
+  });
+
+  it('renders div with class props.className', () => {
+    const wrapper = mount(Palette, {
+      propsData: {
+        className: 'class-name',
+        palette,
+      },
+    });
+    expect(wrapper.find('.class-name').length).to.equal(1);
   });
 });

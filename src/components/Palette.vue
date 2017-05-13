@@ -1,6 +1,6 @@
 <template>
   <div v-if="palette.rgb">
-    <div class="palette">
+    <div :class="className">
 	    <swatch :color="palette.rgb.primary" :tone="palette.tone.primary" />
 	    <swatch :color="palette.rgb.accent" :tone="palette.tone.accent" />
 	    <swatch :color="palette.rgb.grayLight" :tone="palette.tone.grayLight" />
@@ -14,7 +14,7 @@ import Swatch from '@/components/Swatch';
 
 export default{
   name: 'palette',
-  props: ['palette'],
+  props: ['palette', 'className'],
   components: {
     Swatch,
   },
