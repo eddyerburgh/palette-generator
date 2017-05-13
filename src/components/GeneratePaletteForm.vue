@@ -23,6 +23,7 @@ import { isValidRgb, isValidHex } from '@/lib/validators';
 import { hexToRgb } from '@/lib/convert';
 
 export default{
+  name: 'generate-palette-form',
   methods: {
     ...mapActions([
       'generateRandomPalette',
