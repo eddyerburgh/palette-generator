@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import generatePalette from '../../../src/lib/generate-palette';
+import generatePalette from '@/lib/generate-palette';
 
 describe('generatePalette', () => {
   it('returns an object with the correct color properties when passed an rgb value', () => {

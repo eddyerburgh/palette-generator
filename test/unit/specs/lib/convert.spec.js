@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as convert from '../../../src/lib/convert';
+import * as convert from '@/lib/convert';
 
 describe('convert', () => {
   describe('rgbToHex', () => {

@@ -29,7 +29,7 @@ export function hslToRgb(h, s, l) {
   let b;
 
   if (s === 0) {
-    r = g = b = l; // achromatic
+    r = g = b = l; // eslint-disable-line no-multi-assign
   } else {
     const q = l < 0.5 ? l * (1 + s) : l + s - l * s;
     const p = 2 * l - q;
@@ -59,7 +59,7 @@ export function rgbToHsl(red, green, blue) {
   const l = (max + min) / 2;
 
   if (max === min) {
-    h = s = 0; // achromatic
+    h = s = 0; // eslint-disable-line no-multi-assign
   } else {
     const d = max - min;
     s = l > 0.5 ? d / (2 - max - min) : d / (max + min);

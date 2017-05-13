@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import Swatch from './Swatch';
+import Swatch from '@/components/Swatch';
 
 export default{
   computed: mapGetters([

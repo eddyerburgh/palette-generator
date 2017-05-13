@@ -1,21 +1,20 @@
-require('babel-register');
-const chromeDriver = require('chromedriver');
-const config = require('../../config');
+require('babel-register')
+var config = require('../../config')
 
-// http://nightwatchjs.org/guide#settings-file
+// http://nightwatchjs.org/gettingstarted#settings-file
 module.exports = {
-  src_folders: ['test/e2e/test'],
+  src_folders: ['test/e2e/specs'],
   output_folder: 'test/e2e/reports',
   custom_assertions_path: ['test/e2e/custom-assertions'],
 
   selenium: {
     start_process: true,
-    server_path: 'node_modules/selenium-server/lib/runner/selenium-server-standalone-2.53.1.jar',
+    server_path: require('selenium-server').path,
     host: '127.0.0.1',
     port: 4444,
     cli_args: {
-      'webdriver.chrome.driver': chromeDriver.path,
-    },
+      'webdriver.chrome.driver': require('chromedriver').path
+    }
   },
 
   test_settings: {
@@ -24,24 +23,24 @@ module.exports = {
       selenium_host: 'localhost',
       silent: true,
       globals: {
-        devServerURL: `http://localhost:${process.env.PORT || config.dev.port}`,
-      },
+        devServerURL: 'http://localhost:' + (process.env.PORT || config.dev.port)
+      }
     },
 
     chrome: {
       desiredCapabilities: {
         browserName: 'chrome',
         javascriptEnabled: true,
-        acceptSslCerts: true,
-      },
+        acceptSslCerts: true
+      }
     },
 
     firefox: {
       desiredCapabilities: {
         browserName: 'firefox',
         javascriptEnabled: true,
-        acceptSslCerts: true,
-      },
-    },
-  },
-};
+        acceptSslCerts: true
+      }
+    }
+  }
+}

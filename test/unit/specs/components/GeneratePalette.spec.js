@@ -1,10 +1,11 @@
-import avoriaz, { mount } from 'avoriaz';
+import { mount } from 'avoriaz';
+import Vue from 'vue';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import Vuex from 'vuex';
-import GeneratePalette from '../../../src/components/GeneratePalette';
+import GeneratePalette from '@/components/GeneratePalette';
 
-avoriaz.use(Vuex);
+Vue.use(Vuex);
 
 describe('GeneratePalette.vue', () => {
   let actions;

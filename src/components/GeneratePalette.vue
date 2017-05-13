@@ -19,8 +19,8 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { isValidRgb, isValidHex } from '../lib/validators';
-import { hexToRgb } from '../lib/convert';
+import { isValidRgb, isValidHex } from '@/lib/validators';
+import { hexToRgb } from '@/lib/convert';
 
 export default{
   methods: {

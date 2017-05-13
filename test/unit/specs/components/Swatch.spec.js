@@ -1,7 +1,6 @@
 import { expect } from 'chai';
 import { mount } from 'avoriaz';
-import 'babel-polyfill';
-import Swatch from '../../../src/components/Swatch';
+import Swatch from '@/components/Swatch';
 
 
 describe('Swatch', () => {

@@ -1,4 +1,2 @@
 build/*.js
 config/*.js
-**/karma.conf.js
-**/coverage/**/*.js

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import * as validators from '../../../src/lib/validators';
+import * as validators from '@/lib/validators';
 
 describe('validators', () => {
   describe('isValidRgb', () => {
