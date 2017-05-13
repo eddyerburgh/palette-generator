@@ -10,13 +10,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import Swatch from '@/components/Swatch';
 
 export default{
-  computed: mapGetters([
-    'palette',
-  ]),
+  name: 'palette',
+  props: ['palette'],
   components: {
     Swatch,
   },
