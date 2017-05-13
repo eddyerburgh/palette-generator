@@ -6,25 +6,32 @@
           </div>
         </div>
         <div class="col-lg-8">
-          <palette />
+          <palette :palette="palette" />
         </div>
         <div class="col-lg-2">
-          <palette />
+          <history-list />
         </div>
     </div>
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
   import GeneratePaletteForm from '@/components/GeneratePaletteForm';
   import Palette from '@/components/Palette';
+  import HistoryList from '@/components/HistoryList';
   import { hexToRgb } from '@/lib/convert';
 
   export default {
     name: 'palette-generator',
 
+    computed: mapGetters([
+      'palette',
+    ]),
+
     components: {
       GeneratePaletteForm,
-      palette: Palette,
+      Palette,
+      HistoryList,
     },
 
     props: ['hex'],
