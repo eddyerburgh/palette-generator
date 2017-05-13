@@ -6,6 +6,12 @@ const routes = [
     name: 'PaletteGenerator',
     component: PaletteGenerator,
   },
+  {
+    path: '/:hex',
+    name: 'PaletteGenerator',
+    component: PaletteGenerator,
+    props: true,
+  },
 ];
 
 export default routes;

@@ -13,12 +13,22 @@
 <script>
   import GeneratePalette from '@/components/GeneratePalette';
   import Palette from '@/components/Palette';
+  import { hexToRgb } from '@/lib/convert';
 
   export default {
     name: 'palette-generator',
+
     components: {
       'generate-palette': GeneratePalette,
       palette: Palette,
+    },
+
+    props: ['hex'],
+
+    beforeMount() {
+      if (this.hex) {
+        this.$store.dispatch('generatePalette', { rgb: hexToRgb(this.hex) });
+      }
     },
   };
 </script>
