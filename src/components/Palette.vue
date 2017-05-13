@@ -1,6 +1,8 @@
 <template>
-  <div v-if="palette.rgb">
-    <div :class="className">
+    <div
+      v-if="palette.rgb"
+      :class="className"
+    >
 	    <swatch
         :color="palette.rgb.primary"
         :tone="palette.tone.primary"
@@ -21,7 +23,6 @@
         :tone="palette.tone.grayDark"
         :displayColor="displayColor"
       />
-    </div>
   </div>
 </template>
 

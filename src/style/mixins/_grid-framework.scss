@@ -8,6 +8,7 @@
   %grid-column {
     position: relative;
     width: 100%;
+    float: left;
     min-height: 1px; // Prevent columns from collapsing when empty
 
     @include make-gutters($gutters);

@@ -6,7 +6,11 @@
           </div>
         </div>
         <div class="col-lg-8">
-          <palette :palette="palette" />
+          <palette
+            :palette="palette"
+            className="palette--main"
+            :displayColor="true"
+          />
         </div>
         <div class="col-lg-2">
           <history-list />
