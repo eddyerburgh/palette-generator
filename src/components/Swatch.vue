@@ -8,6 +8,7 @@
 <script>
     export default{
       props: ['color', 'tone'],
+      name: 'swatch',
     };
 </script>
 
