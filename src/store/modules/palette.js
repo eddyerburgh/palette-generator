@@ -7,11 +7,13 @@ const initialState = {
     hex: null,
     tone: null,
   },
+  history: [],
 };
 
 // getters
 const getters = {
   palette: state => state.palette,
+  history: state => state.history,
 };
 
 // actions
@@ -20,10 +22,12 @@ const actions = {
     const rgb = randomRgb();
     const palette = generatePalette(rgb);
     commit('updatePalette', palette);
+    commit('addPaletteToHistory', palette);
   },
   generatePalette({ commit }, { rgb }) {
     const palette = generatePalette(rgb);
     commit('updatePalette', palette);
+    commit('addPaletteToHistory', palette);
   },
 };
 
@@ -31,6 +35,12 @@ const actions = {
 const mutations = {
   updatePalette(state, palette) {
     state.palette = palette; // eslint-disable-line no-param-reassign
+  },
+  addPaletteToHistory(state, palette) {
+    if (state.history.length > 4) {
+      state.history.shift();
+    }
+    state.history.push(palette); // eslint-disable-line no-param-reassign
   },
 };
 

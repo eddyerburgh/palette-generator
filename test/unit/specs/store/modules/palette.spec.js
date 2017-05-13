@@ -1,0 +1,101 @@
+import sinon from 'sinon';
+import paletteModule from '@/store/modules/palette';
+
+describe('palette', () => {
+  describe('actions', () => {
+    describe('generateRandomPalette', () => {
+      it('calls commit with updatePalette with result of generatePalette', () => {
+        const generatePaletteReturn = { palette: true };
+        const commit = sinon.stub();
+        paletteModule.__Rewire__('generatePalette', sinon.stub().returns(generatePaletteReturn));
+        paletteModule.actions.generateRandomPalette({ commit });
+        expect(commit.calledWith('updatePalette', generatePaletteReturn)).to.equal(true);
+        paletteModule.__ResetDependency__('generatePalette');
+      });
+
+      it('calls commit with addPaletteToHistory with result of generatePalette', () => {
+        const generatePaletteReturn = { palette: true };
+        const commit = sinon.stub();
+        paletteModule.__Rewire__('generatePalette', sinon.stub().returns(generatePaletteReturn));
+        paletteModule.actions.generateRandomPalette({ commit });
+        expect(commit.calledWith('addPaletteToHistory', generatePaletteReturn)).to.equal(true);
+        paletteModule.__ResetDependency__('generatePalette');
+      });
+    });
+
+    describe('generatePalette', () => {
+      it('calls commit with updatePalette with result of generatePalette', () => {
+        const rgb = 'rgb(0,0,0)';
+        const generatePaletteReturn = { palette: true };
+        const commit = sinon.stub();
+        paletteModule.__Rewire__('generatePalette', sinon.stub().withArgs(rgb).returns(generatePaletteReturn));
+        paletteModule.actions.generatePalette({ commit }, { rgb });
+        expect(commit.calledWith('updatePalette', generatePaletteReturn)).to.equal(true);
+        paletteModule.__ResetDependency__('generatePalette');
+      });
+
+      it('calls commit with addPaletteToHistory with result of generatePalette', () => {
+        const rgb = 'rgb(0,0,0)';
+        const generatePaletteReturn = { palette: true };
+        const commit = sinon.stub();
+        paletteModule.__Rewire__('generatePalette', sinon.stub().withArgs(rgb).returns(generatePaletteReturn));
+        paletteModule.actions.generatePalette({ commit }, { rgb });
+        expect(commit.calledWith('addPaletteToHistory', generatePaletteReturn)).to.equal(true);
+        paletteModule.__ResetDependency__('generatePalette');
+      });
+    });
+  });
+
+  describe('getters', () => {
+    describe('palette', () => {
+      it('returns state.palette', () => {
+        const state = {
+          palette: { palette: true },
+        };
+        expect(paletteModule.getters.palette(state)).to.equal(state.palette);
+      });
+    });
+
+    describe('history', () => {
+      it('returns state.history', () => {
+        const state = {
+          history: [{ palette: true }],
+        };
+        expect(paletteModule.getters.history(state)).to.equal(state.history);
+      });
+    });
+  });
+  describe('mutations', () => {
+    describe('updatePalette', () => {
+      it('adds palette to state.palette', () => {
+        const state = {};
+        const palette = { palette: true };
+        paletteModule.mutations.updatePalette(state, palette);
+        expect(state.palette).to.equal(palette);
+      });
+    });
+
+    describe('addPaletteToHistory', () => {
+      it('adds palette to state.history array', () => {
+        const state = {
+          history: [{}],
+        };
+        const palette = { palette: true };
+        paletteModule.mutations.addPaletteToHistory(state, palette);
+        expect(state.history[1]).to.equal(palette);
+      });
+
+      it('removes first item from state.history if length is 5 and adds palette to end', () => {
+        const firstPalette = { palette: true };
+        const secondPalette = { palette: true };
+        const state = {
+          history: [firstPalette, secondPalette, {}, {}, {}],
+        };
+        const palette = { palette: true };
+        paletteModule.mutations.addPaletteToHistory(state, palette);
+        expect(state.history[0]).to.equal(secondPalette);
+        expect(state.history[4]).to.equal(palette);
+      });
+    });
+  });
+});
