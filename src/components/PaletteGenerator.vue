@@ -1,5 +1,8 @@
 <template>
       <div class="palette-generator">
+        <div v-if="copied" class="box copied-message">
+          Copied to clipboard!
+        </div>
         <section class="palette-generator__section section">
         <div class="container">
           <div class="columns">
@@ -46,9 +49,17 @@
 
     props: ['hex'],
 
+    data() {
+      return {
+        copied: false,
+      };
+    },
+
     methods: {
       copyColor(color) {
         copyToClipboard(color);
+        this.copied = true;
+        setTimeout(() => { this.copied = false; }, 500);
       },
       ...mapActions([
         'updatePalette',
