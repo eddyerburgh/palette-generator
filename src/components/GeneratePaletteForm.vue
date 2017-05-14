@@ -1,16 +1,24 @@
 <template>
   <div class="text-align-center">
-    <input
-				    id="generate-palette"
-				    type="text"
-				    placeholder="enter hex or rgb"
-				    @input="generatePaletteIfValidColor"
-    />
+    <div class="field is-grouped">
+      <p class="control is-expanded">
+        <input
+              id="generate-palette"
+              type="text"
+              placeholder="enter hex or rgb"
+              @input="generatePaletteIfValidColor"
+              class="input"
+        />
+      </p>
+      <p class="control">
+        <input type="submit" class="button" />
+      </p>
+    </div>
 	  <p>OR</p>
     <button
             @click="generateRandomPalette()"
             id="random-palette"
-            class="button text-align-center"
+            class="button is-primary"
     >
 	    generate random palette
 	    </button>

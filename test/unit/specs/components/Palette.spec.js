@@ -81,6 +81,6 @@ describe('Palette.vue', () => {
     });
     wrapper.find('div')[0].simulate('click');
     expect(handleClick.calledOnce).to.equal(true);
-    expect(handleClick.calledWith(palette)).to.equal(true);
+    expect(handleClick.calledWith({ palette })).to.equal(true);
   });
 });

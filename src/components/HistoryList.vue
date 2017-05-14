@@ -1,11 +1,13 @@
 <template>
   <div class="history-list">
+    <h2 class="subtitle">History</h2>
+    <div class="box palette--history-list__container" v-for="palette in history">
       <palette
-        v-for="palette in history"
         :palette="palette"
         :handleClick="paletteOnClick"
         className="palette--history-list"
       />
+    </div>
   </div>
 </template>
 

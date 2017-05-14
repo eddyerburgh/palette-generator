@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div class="container">
-      <div class="col-lg-8 offset-lg-2">
-        <h1 class="text-align-center">Palette Generator</h1>
+      <div class="column">
+        <h1 class="title">Palette Generator</h1>
+        <hr />
       </div>
     </div>
     <router-view></router-view>

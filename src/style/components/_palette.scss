@@ -1,10 +1,21 @@
+.palette--main,
+.palette--history-list {
+  display: flex;
+}
 .palette--main {
   width: 100%;
-  height: 50vh;
-  margin: 0 auto;
+  flex: 1;
 }
 
 .palette--history-list {
   width: 100%;
-  height: 20%;
+  height: 100%;
+}
+
+.palette--history-list__container {
+  padding: .25rem;
+  float: right;
+  width: 18%;
+  margin-right: 2%;
+  height: 60%;
 }

@@ -1,23 +1,25 @@
 <template>
-      <div>
+      <div class="palette-generator">
+        <section class="palette-generator__section section">
         <div class="container">
-          <div class="col-lg-8 offset-lg-2">
-            <generate-palette-form />
+          <div class="columns">
+            <div class="column">
+              <generate-palette-form />
+            </div>
+            <div class="column">
+              <history-list
+                :paletteOnClick="updatePalette"
+              />
+            </div>
           </div>
         </div>
-        <div class="col-lg-8">
+        </section>
           <palette
             :palette="palette"
             className="palette--main"
             :displayColor="true"
             :swatchOnClick="copyColor"
           />
-        </div>
-        <div class="col-lg-2">
-          <history-list
-            :paletteOnClick="updatePalette"
-          />
-        </div>
     </div>
 </template>
 

@@ -1,18 +1,9 @@
-// Fix vendor differences
-@import "reset";
-
-@import "variables";
-@import "mixins";
-@import "utilities";
-
-// Bootstrap grid
-@import "grid";
-
-// Base styles
-@import "main";
-@import "typography";
-@import "buttons";
-@import "forms";
+// General
+@import "general";
 
 // Components
-@import "components";
+@import "components/history-list";
+@import "components/palette";
+@import "components/palette-generator";
+@import "components/app";
+@import "components/swatch";
