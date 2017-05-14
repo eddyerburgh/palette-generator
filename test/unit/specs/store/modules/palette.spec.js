@@ -5,7 +5,7 @@ describe('palette', () => {
   describe('actions', () => {
     describe('generateRandomPalette', () => {
       it('calls commit with updatePalette with result of generatePalette', () => {
-        const generatePaletteReturn = { palette: true };
+        const generatePaletteReturn = { hex: { primary: '123' } };
         const commit = sinon.stub();
         paletteModule.__Rewire__('generatePalette', sinon.stub().returns(generatePaletteReturn));
         paletteModule.actions.generateRandomPalette({ commit });
@@ -14,11 +14,19 @@ describe('palette', () => {
       });
 
       it('calls commit with addPaletteToHistory with result of generatePalette', () => {
-        const generatePaletteReturn = { palette: true };
+        const generatePaletteReturn = { hex: { primary: '123' } };
         const commit = sinon.stub();
         paletteModule.__Rewire__('generatePalette', sinon.stub().returns(generatePaletteReturn));
         paletteModule.actions.generateRandomPalette({ commit });
         expect(commit.calledWith('addPaletteToHistory', generatePaletteReturn)).to.equal(true);
+        paletteModule.__ResetDependency__('generatePalette');
+      });
+
+      it('updates url with primary hex value', () => {
+        const hex = '666666';
+        paletteModule.__Rewire__('generatePalette', () => ({ hex: { primary: `#${hex}` } }));
+        paletteModule.actions.generateRandomPalette({ commit: () => {} });
+        expect(window.location.href).to.equal(`${location.origin}/${hex}`);
         paletteModule.__ResetDependency__('generatePalette');
       });
     });
@@ -26,7 +34,9 @@ describe('palette', () => {
     describe('generatePalette', () => {
       it('calls commit with updatePalette with result of generatePalette', () => {
         const rgb = 'rgb(0,0,0)';
-        const generatePaletteReturn = { palette: true };
+        const generatePaletteReturn = { hex: {
+          primary: 'primary',
+        } };
         const commit = sinon.stub();
         paletteModule.__Rewire__('generatePalette', sinon.stub().withArgs(rgb).returns(generatePaletteReturn));
         paletteModule.actions.generatePalette({ commit }, { rgb });
@@ -36,11 +46,27 @@ describe('palette', () => {
 
       it('calls commit with addPaletteToHistory with result of generatePalette', () => {
         const rgb = 'rgb(0,0,0)';
-        const generatePaletteReturn = { palette: true };
+        const generatePaletteReturn = { hex: {
+          primary: 'primary',
+        } };
         const commit = sinon.stub();
         paletteModule.__Rewire__('generatePalette', sinon.stub().withArgs(rgb).returns(generatePaletteReturn));
         paletteModule.actions.generatePalette({ commit }, { rgb });
         expect(commit.calledWith('addPaletteToHistory', generatePaletteReturn)).to.equal(true);
+        paletteModule.__ResetDependency__('generatePalette');
+      });
+
+      it('updates url with primary hex value', () => {
+        const hex = '666686';
+        const rgb = 'rgb(0,0,0)';
+        const palette = {
+          hex: {
+            primary: `#${hex}`,
+          },
+        };
+        paletteModule.__Rewire__('generatePalette', sinon.stub().withArgs(rgb).returns(palette));
+        paletteModule.actions.generatePalette({ commit: () => {} }, { rgb });
+        expect(window.location.href).to.equal(`${location.origin}/${hex}`);
         paletteModule.__ResetDependency__('generatePalette');
       });
     });
