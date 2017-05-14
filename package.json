@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "check-input": "^1.3.0",
+    "copy-to-clipboard": "^3.0.6",
     "vue": "^2.2.6",
     "vue-router": "^2.3.1",
     "vuex": "^2.3.1"

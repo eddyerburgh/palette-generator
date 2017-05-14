@@ -1,5 +1,6 @@
 <template>
     <div class="swatch"
+         v-on:click="handleClick && handleClick(color)"
          :style="{background: color}">
         <div
           v-if="displayColor"
@@ -12,7 +13,12 @@
 <script>
     export default{
       name: 'swatch',
-      props: ['color', 'tone', 'displayColor'],
+      props: [
+        'color',
+        'tone',
+        'displayColor',
+        'handleClick',
+      ],
     };
 </script>
 

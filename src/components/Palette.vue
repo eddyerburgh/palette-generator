@@ -7,21 +7,25 @@
         :color="palette.rgb.primary"
         :tone="palette.tone.primary"
         :displayColor="displayColor"
+        :handleClick="swatchOnClick"
       />
 	    <swatch
         :color="palette.rgb.accent"
         :tone="palette.tone.accent"
         :displayColor="displayColor"
+        :handleClick="swatchOnClick"
       />
 	    <swatch
         :color="palette.rgb.grayLight"
         :tone="palette.tone.grayLight"
         :displayColor="displayColor"
+        :handleClick="swatchOnClick"
       />
 	    <swatch
         :color="palette.rgb.grayDark"
         :tone="palette.tone.grayDark"
         :displayColor="displayColor"
+        :handleClick="swatchOnClick"
       />
   </div>
 </template>
@@ -35,6 +39,7 @@ export default{
     'palette',
     'className',
     'displayColor',
+    'swatchOnClick',
   ],
   components: {
     Swatch,

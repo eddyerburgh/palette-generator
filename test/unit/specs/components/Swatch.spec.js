@@ -28,4 +28,15 @@ describe('Swatch', () => {
     const wrapper = mount(Swatch);
     expect(wrapper.contains('.swatch-info')).to.equal(false);
   });
+
+  it('calls props.swatchOnClick with props.color if handleClick is passed', () => {
+    const handleClick = sinon.stub();
+    const color = 'rgb(0,0,0)';
+    const wrapper = mount(Swatch, {
+      propsData: { color, handleClick },
+    });
+    wrapper.find('div')[0].simulate('click');
+    expect(handleClick.calledOnce).to.equal(true);
+    expect(handleClick.calledWith(color)).to.equal(true);
+  });
 });

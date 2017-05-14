@@ -59,4 +59,15 @@ describe('Palette.vue', () => {
     });
     expect(wrapper.find(Swatch)[0].vm.displayColor).to.equal(displayColor);
   });
+
+  it('passes props.onSwatchClick to Swatch', () => {
+    const swatchOnClick = () => {};
+    const wrapper = mount(Palette, {
+      propsData: {
+        palette,
+        swatchOnClick,
+      },
+    });
+    expect(wrapper.find(Swatch)[0].vm.handleClick).to.equal(swatchOnClick);
+  });
 });

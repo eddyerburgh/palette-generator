@@ -10,6 +10,7 @@
             :palette="palette"
             className="palette--main"
             :displayColor="true"
+            :swatchOnClick="copyColor"
           />
         </div>
         <div class="col-lg-2">
@@ -20,6 +21,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
+  import copyToClipboard from 'copy-to-clipboard';
   import GeneratePaletteForm from '@/components/GeneratePaletteForm';
   import Palette from '@/components/Palette';
   import HistoryList from '@/components/HistoryList';
@@ -39,6 +41,12 @@
     },
 
     props: ['hex'],
+
+    methods: {
+      copyColor(color) {
+        copyToClipboard(color);
+      },
+    },
 
     beforeMount() {
       if (this.hex) {

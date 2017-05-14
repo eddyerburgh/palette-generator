@@ -45,4 +45,14 @@ describe('PaletteGenerator.vue', () => {
     const wrapper = mount(PaletteGenerator, { store, globals: { $store } });
     expect(wrapper.find(Palette)[0].vm.palette).to.equal(palette);
   });
+
+  it('calls copyToClipboard with color value', () => {
+    const copyToClipboard = sinon.stub();
+    const color = 'red';
+    PaletteGenerator.__Rewire__('copyToClipboard', copyToClipboard);
+    const wrapper = mount(PaletteGenerator);
+    wrapper.vm.copyColor(color);
+    expect(copyToClipboard.calledWith(color)).to.equal(true);
+    PaletteGenerator.__ResetDependency__('copyToClipboard');
+  });
 });
