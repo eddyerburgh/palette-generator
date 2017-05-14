@@ -17,22 +17,23 @@ describe('GeneratePaletteForm.vue', () => {
       generateRandomPalette: sinon.stub(),
     };
     store = new Vuex.Store({
-      state: {},
       actions,
     });
   });
 
-  it('calls store action generateRandomPalette when random-palette is clicked', () => {
+  it.skip('calls store action generateRandomPalette when random-palette is clicked', () => {
     const wrapper = mount(GeneratePaletteForm, { store });
-    const input = wrapper.find('#generate-palette')[0];
-    input.element.value = '#666';
-    input.simulate('input');
+    const rgb = 'rgb(0,0,0)';
+    wrapper.find('input')[0].element.value = rgb;
+    wrapper.find('input')[0].simulate('change');
+    wrapper.find('form')[0].simulate('submit');
     expect(actions.generatePalette.calledOnce).to.equal(true);
+    expect(actions.generatePalette.calledWith({ rgb })).to.equal(true);
   });
 
   it('calls store action generateRandomPalette when random-palette is clicked', () => {
     const wrapper = mount(GeneratePaletteForm, { store });
-    wrapper.find('#random-palette')[0].simulate('click');
+    wrapper.find('#random-generate')[0].simulate('click');
     expect(actions.generateRandomPalette.calledOnce).to.equal(true);
   });
 });

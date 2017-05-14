@@ -1,23 +1,28 @@
 <template>
   <div class="text-align-center">
-    <div class="field is-grouped">
-      <p class="control is-expanded">
-        <input
+        <form
+          class="field is-grouped"
+          v-on:submit.prevent="generatePaletteIfValidColor">
+          <p class="control is-expanded">
+            <input
               id="generate-palette"
               type="text"
               placeholder="enter hex or rgb"
-              @input="generatePaletteIfValidColor"
               class="input"
-        />
-      </p>
-      <p class="control">
-        <input type="submit" class="button" />
-      </p>
-    </div>
-	  <p>OR</p>
+              v-model="inputValue"
+            />
+          </p>
+          <p class="control">
+            <input
+              type="submit"
+              class="button"
+              v-on:submit.prevent="generatePaletteIfValidColor"
+            />
+          </p>
+      </form>
     <button
             @click="generateRandomPalette()"
-            id="random-palette"
+            id="random-generate"
             class="button is-primary"
     >
 	    generate random palette
@@ -36,13 +41,12 @@ export default{
     ...mapActions([
       'generateRandomPalette',
     ]),
-    generatePaletteIfValidColor: function generatePaletteIfValidColor(event) {
-      const inputValue = event.target.value;
-      if (isValidHex(inputValue)) {
-        this.$store.dispatch('generatePalette', { rgb: hexToRgb(inputValue) });
+    generatePaletteIfValidColor() {
+      if (isValidHex(this.inputValue)) {
+        this.$store.dispatch('generatePalette', { rgb: hexToRgb(this.inputValue) });
       }
-      if (isValidRgb(inputValue)) {
-        this.$store.dispatch('generatePalette', { rgb: inputValue });
+      if (isValidRgb(this.inputValue)) {
+        this.$store.dispatch('generatePalette', { rgb: this.inputValue });
       }
     },
   },
