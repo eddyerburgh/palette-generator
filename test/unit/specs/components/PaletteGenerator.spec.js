@@ -5,12 +5,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import PaletteGenerator from '@/components/PaletteGenerator';
 import Palette from '@/components/Palette';
+import HistoryList from '@/components/HistoryList';
 
 Vue.use(Vuex);
 
 describe('PaletteGenerator.vue', () => {
   const palette = { palette: true };
   let getters;
+  let actions;
   let store;
 
   beforeEach(() => {
@@ -18,8 +20,13 @@ describe('PaletteGenerator.vue', () => {
       palette: () => palette,
     };
 
+    actions = {
+      updatePalette: sinon.stub(),
+    };
+
     store = new Vuex.Store({
       getters,
+      actions,
     });
   });
 
@@ -46,6 +53,12 @@ describe('PaletteGenerator.vue', () => {
     expect(wrapper.find(Palette)[0].vm.palette).to.equal(palette);
   });
 
+  it('renders Palette with props of state.palette', () => {
+    const $store = { dispatch: () => {} };
+    const wrapper = mount(PaletteGenerator, { store, globals: { $store } });
+    expect(wrapper.find(Palette)[0].vm.palette).to.equal(palette);
+  });
+
   it('calls copyToClipboard with color value', () => {
     const copyToClipboard = sinon.stub();
     const color = 'red';
@@ -54,5 +67,11 @@ describe('PaletteGenerator.vue', () => {
     wrapper.vm.copyColor(color);
     expect(copyToClipboard.calledWith(color)).to.equal(true);
     PaletteGenerator.__ResetDependency__('copyToClipboard');
+  });
+
+  it('passes updatePalette action to HistoryList', () => {
+    const wrapper = mount(PaletteGenerator, { store });
+    wrapper.find(HistoryList)[0].vm.paletteOnClick();
+    expect(actions.updatePalette.calledOnce).to.equal(true);
   });
 });

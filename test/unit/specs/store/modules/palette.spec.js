@@ -70,6 +70,39 @@ describe('palette', () => {
         paletteModule.__ResetDependency__('generatePalette');
       });
     });
+
+    describe('updatePalette', () => {
+      it('calls commit with updatePalette with palette', () => {
+        const palette = {
+          hex: {
+            primary: 'primary',
+          },
+        }; const commit = sinon.stub();
+        paletteModule.actions.updatePalette({ commit }, { palette });
+        expect(commit.calledWith('updatePalette', palette)).to.equal(true);
+      });
+
+      it('calls commit with addPaletteToHistory with result of generatePalette', () => {
+        const palette = {
+          hex: {
+            primary: 'primary',
+          },
+        }; const commit = sinon.stub();
+        paletteModule.actions.updatePalette({ commit }, { palette });
+        expect(commit.calledWith('addPaletteToHistory', palette)).to.equal(true);
+      });
+
+      it('updates url with primary hex value', () => {
+        const hex = 555555;
+        const palette = {
+          hex: {
+            primary: `#${hex}`,
+          },
+        };
+        paletteModule.actions.updatePalette({ commit: () => {} }, { palette });
+        expect(window.location.href).to.equal(`${location.origin}/${hex}`);
+      });
+    });
   });
 
   describe('getters', () => {

@@ -14,13 +14,15 @@
           />
         </div>
         <div class="col-lg-2">
-          <history-list />
+          <history-list
+            :paletteOnClick="updatePalette"
+          />
         </div>
     </div>
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
   import copyToClipboard from 'copy-to-clipboard';
   import GeneratePaletteForm from '@/components/GeneratePaletteForm';
   import Palette from '@/components/Palette';
@@ -46,6 +48,9 @@
       copyColor(color) {
         copyToClipboard(color);
       },
+      ...mapActions([
+        'updatePalette',
+      ]),
     },
 
     beforeMount() {

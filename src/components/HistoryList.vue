@@ -3,6 +3,7 @@
       <palette
         v-for="palette in history"
         :palette="palette"
+        :handleClick="paletteOnClick"
         className="palette--history-list"
       />
   </div>
@@ -20,5 +21,6 @@
     components: {
       Palette,
     },
+    props: ['paletteOnClick'],
   };
 </script>

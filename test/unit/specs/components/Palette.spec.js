@@ -70,4 +70,17 @@ describe('Palette.vue', () => {
     });
     expect(wrapper.find(Swatch)[0].vm.handleClick).to.equal(swatchOnClick);
   });
+
+  it('calls props.handleClick when root div is clicked', () => {
+    const handleClick = sinon.stub();
+    const wrapper = mount(Palette, {
+      propsData: {
+        palette,
+        handleClick,
+      },
+    });
+    wrapper.find('div')[0].simulate('click');
+    expect(handleClick.calledOnce).to.equal(true);
+    expect(handleClick.calledWith(palette)).to.equal(true);
+  });
 });

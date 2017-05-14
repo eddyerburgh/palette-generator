@@ -1,5 +1,6 @@
 <template>
     <div
+      v-on:click="handleClick && handleClick({palette})"
       v-if="palette.rgb"
       :class="className"
     >
@@ -40,6 +41,7 @@ export default{
     'className',
     'displayColor',
     'swatchOnClick',
+    'handleClick',
   ],
   components: {
     Swatch,
