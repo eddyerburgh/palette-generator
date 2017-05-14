@@ -31,7 +31,11 @@ import Swatch from '@/components/Swatch';
 
 export default{
   name: 'palette',
-  props: ['palette', 'className', 'displayColor'],
+  props: [
+    'palette',
+    'className',
+    'displayColor',
+  ],
   components: {
     Swatch,
   },
