@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import PaletteGenerator from '@/components/PaletteGenerator';
-import Palette from '@/components/Palette';
+import Palette from '@/components/palette/Palette';
 import HistoryList from '@/components/HistoryList';
 
 Vue.use(Vuex);

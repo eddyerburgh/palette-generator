@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { mount } from 'avoriaz';
-import Swatch from '@/components/Swatch';
+import Swatch from '@/components/palette/Swatch';
 
 
 describe('Swatch', () => {

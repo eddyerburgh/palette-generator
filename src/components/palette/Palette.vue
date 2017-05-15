@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import Swatch from '@/components/Swatch';
+import Swatch from '@/components/palette/Swatch';
 
 export default{
   name: 'palette',

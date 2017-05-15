@@ -30,7 +30,7 @@
   import { mapGetters, mapActions } from 'vuex';
   import copyToClipboard from 'copy-to-clipboard';
   import GeneratePaletteForm from '@/components/GeneratePaletteForm';
-  import Palette from '@/components/Palette';
+  import Palette from '@/components/palette/Palette';
   import HistoryList from '@/components/HistoryList';
   import { hexToRgb } from '@/lib/convert';
 

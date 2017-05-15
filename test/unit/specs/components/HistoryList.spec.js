@@ -3,7 +3,7 @@ import Vue from 'vue';
 import { expect } from 'chai';
 import Vuex from 'vuex';
 import HistoryList from '@/components/HistoryList';
-import Palette from '@/components/Palette';
+import Palette from '@/components/palette/Palette';
 
 Vue.use(Vuex);
 

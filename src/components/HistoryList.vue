@@ -13,7 +13,7 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import Palette from '@/components/Palette';
+  import Palette from '@/components/palette/Palette';
 
   export default{
     name: 'history-list',

@@ -1,6 +1,6 @@
 import { mount } from 'avoriaz';
-import Palette from '@/components/Palette';
-import Swatch from '@/components/Swatch';
+import Palette from '@/components/palette/Palette';
+import Swatch from '@/components/palette/Swatch';
 
 describe('Palette.vue', () => {
   let palette;
