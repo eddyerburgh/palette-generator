@@ -3,7 +3,7 @@ import Vue from 'vue';
 import sinon from 'sinon';
 import { expect } from 'chai';
 import Vuex from 'vuex';
-import GeneratePaletteForm from '@/components/GeneratePaletteForm';
+import GeneratePaletteForm from '@/components/input/GeneratePaletteForm';
 
 Vue.use(Vuex);
 
