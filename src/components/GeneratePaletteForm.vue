@@ -9,7 +9,12 @@
               type="text"
               placeholder="enter hex or rgb"
               class="input"
+              :class="{
+                'is-success': isValid,
+                'is-danger': isInvalid
+              }"
               v-model="inputValue"
+              @input="validateInput"
             />
           </p>
           <p class="control">
@@ -37,6 +42,13 @@ import { hexToRgb } from '@/lib/convert';
 
 export default{
   name: 'generate-palette-form',
+  data() {
+    return {
+      isValid: false,
+      isInvalid: false,
+      inputValue: '',
+    };
+  },
   methods: {
     ...mapActions([
       'generateRandomPalette',
@@ -47,6 +59,18 @@ export default{
       }
       if (isValidRgb(this.inputValue)) {
         this.$store.dispatch('generatePalette', { rgb: this.inputValue });
+      }
+    },
+    validateInput() {
+      if (isValidHex(this.inputValue)) {
+        this.isValid = true;
+        this.isInvalid = false;
+      } else if (isValidRgb(this.inputValue)) {
+        this.isValid = true;
+        this.isInvalid = false;
+      } else {
+        this.isValid = false;
+        this.isInvalid = true;
       }
     },
   },
