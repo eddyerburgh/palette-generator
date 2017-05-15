@@ -1,6 +1,5 @@
 .swatch {
   flex: 1;
-  width: 25%;
   float: left;
   position: relative;
   cursor: pointer;
@@ -8,7 +7,7 @@
 
 .swatch-info {
   position: absolute;
-  top: 90%;
+  top: 80%;
   width: 100%;
   text-align: center;
   opacity: .6;
