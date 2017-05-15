@@ -141,19 +141,19 @@ describe('palette', () => {
         };
         const palette = { palette: true };
         paletteModule.mutations.addPaletteToHistory(state, palette);
-        expect(state.history[1]).to.equal(palette);
+        expect(state.history[0]).to.equal(palette);
       });
 
-      it('removes first item from state.history if length is 5 and adds palette to end', () => {
-        const firstPalette = { palette: true };
-        const secondPalette = { palette: true };
+      it('removes last item from state.history if length is 5 and adds palette to beginning', () => {
+        const secondLastPalette = { secondLastPalette: true };
+        const lastPalette = { lastPalette: true };
         const state = {
-          history: [firstPalette, secondPalette, {}, {}, {}],
+          history: [{}, {}, {}, secondLastPalette, lastPalette],
         };
         const palette = { palette: true };
         paletteModule.mutations.addPaletteToHistory(state, palette);
-        expect(state.history[0]).to.equal(secondPalette);
-        expect(state.history[4]).to.equal(palette);
+        expect(state.history[4]).to.equal(secondLastPalette);
+        expect(state.history[0]).to.equal(palette);
       });
     });
   });

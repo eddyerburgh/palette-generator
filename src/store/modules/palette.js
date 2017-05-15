@@ -51,9 +51,9 @@ const mutations = {
 
   addPaletteToHistory(state, palette) {
     if (state.history.length > 4) {
-      state.history.shift();
+      state.history.pop();
     }
-    state.history.push(palette); // eslint-disable-line no-param-reassign
+    state.history.unshift(palette); // eslint-disable-line no-param-reassign
   },
 };
 
