@@ -37,16 +37,28 @@ describe('GeneratePaletteForm.vue', () => {
     expect(actions.generateRandomPalette.calledOnce).to.equal(true);
   });
 
-  it('gives #generate-palette a class of is-success if data.isValid is true', () => {
+  it('gives #generate-palette a class of is-success if data.isValid is true and isDirty is true', () => {
     const wrapper = mount(GeneratePaletteForm, { store });
-    wrapper.setData({ isValid: true });
+    wrapper.setData({ isValid: true, isDirty: true });
     expect(wrapper.find('#generate-palette')[0].hasClass('is-success')).to.equal(true);
   });
 
-  it('gives #generate-palette a class of is-error if data.isInvalid is true', () => {
+  it('gives #generate-palette a class of is-error if data.isInvalid is true and isDirty is true', () => {
     const wrapper = mount(GeneratePaletteForm, { store });
-    wrapper.setData({ isInvalid: true });
+    wrapper.setData({ isInvalid: true, isDirty: true });
     expect(wrapper.find('#generate-palette')[0].hasClass('is-danger')).to.equal(true);
+  });
+
+  it('gives .fa a class fa-check when isValid is true and isDirty is true', () => {
+    const wrapper = mount(GeneratePaletteForm, { store });
+    wrapper.setData({ isValid: true, isDirty: true });
+    expect(wrapper.find('i')[0].hasClass('fa-check')).to.equal(true);
+  });
+
+  it('gives .fa a class fa-warning when isValid is true and isDirty is true', () => {
+    const wrapper = mount(GeneratePaletteForm, { store });
+    wrapper.setData({ isInvalid: true, isDirty: true });
+    expect(wrapper.find('i')[0].hasClass('fa-warning')).to.equal(true);
   });
 
   it('when change is called, sets isValid true and isInvalid false when isValidRgb returns true', () => {

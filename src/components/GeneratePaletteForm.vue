@@ -3,19 +3,29 @@
         <form
           class="field is-grouped"
           v-on:submit.prevent="generatePaletteIfValidColor">
-          <p class="control is-expanded">
+          <p class="control is-expanded has-icons-right">
             <input
               id="generate-palette"
               type="text"
               placeholder="enter hex or rgb"
               class="input"
               :class="{
-                'is-success': isValid,
-                'is-danger': isInvalid
+                'is-success': isValid && isDirty,
+                'is-danger': isInvalid && isDirty
               }"
               v-model="inputValue"
               @input="validateInput"
             />
+            <span class="icon is-small is-right">
+              <i
+                class="fa"
+                :class="{
+                'fa-check': isValid && isDirty,
+                'fa-warning': isInvalid && isDirty
+                }"
+              />
+            </span>
+
           </p>
           <p class="control">
             <input
@@ -46,6 +56,7 @@ export default{
     return {
       isValid: false,
       isInvalid: false,
+      isDirty: false,
       inputValue: '',
     };
   },
@@ -54,10 +65,13 @@ export default{
       'generateRandomPalette',
     ]),
     generatePaletteIfValidColor() {
+      this.isDirty = true;
       if (isValidHex(this.inputValue)) {
+        this.isDirty = false;
         this.$store.dispatch('generatePalette', { rgb: hexToRgb(this.inputValue) });
       }
       if (isValidRgb(this.inputValue)) {
+        this.isDirty = false;
         this.$store.dispatch('generatePalette', { rgb: this.inputValue });
       }
     },
