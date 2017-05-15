@@ -1,27 +1,12 @@
 import { mount } from 'avoriaz';
-import Vue from 'vue';
 import sinon from 'sinon';
 import { expect } from 'chai';
-import Vuex from 'vuex';
 import GeneratePaletteForm from '@/components/input/GeneratePaletteForm';
 
-Vue.use(Vuex);
-
 describe('GeneratePaletteForm.vue', () => {
-  let actions;
-  let store;
-
-  beforeEach(() => {
-    actions = {
-      generateRandomPalette: sinon.stub(),
-    };
-    store = new Vuex.Store({
-      actions,
-    });
-  });
-
-  it('calls store action generateRandomPalette when random-palette is clicked', () => {
+  it('calls store action generatePalette when form is submitted with valid rgb', () => {
     const rgb = 'rgb(0,0,0)';
+    GeneratePaletteForm.__Rewire__('isValidRgb', () => true);
     const $store = { dispatch: sinon.stub() };
     const wrapper = mount(GeneratePaletteForm, { globals: { $store } });
     wrapper.find('#generate-palette')[0].element.value = rgb;
@@ -29,34 +14,29 @@ describe('GeneratePaletteForm.vue', () => {
     wrapper.find('form')[0].simulate('submit');
     expect($store.dispatch.calledOnce).to.equal(true);
     expect($store.dispatch.calledWith('generatePalette', { rgb })).to.equal(true);
-  });
-
-  it('calls store action generateRandomPalette when random-palette is clicked', () => {
-    const wrapper = mount(GeneratePaletteForm, { store });
-    wrapper.find('#random-generate')[0].simulate('click');
-    expect(actions.generateRandomPalette.calledOnce).to.equal(true);
+    GeneratePaletteForm.__ResetDependency__('isValidRgb');
   });
 
   it('gives #generate-palette a class of is-success if data.isValid is true and isDirty is true', () => {
-    const wrapper = mount(GeneratePaletteForm, { store });
+    const wrapper = mount(GeneratePaletteForm);
     wrapper.setData({ isValid: true, isDirty: true });
     expect(wrapper.find('#generate-palette')[0].hasClass('is-success')).to.equal(true);
   });
 
   it('gives #generate-palette a class of is-error if data.isInvalid is true and isDirty is true', () => {
-    const wrapper = mount(GeneratePaletteForm, { store });
+    const wrapper = mount(GeneratePaletteForm);
     wrapper.setData({ isInvalid: true, isDirty: true });
     expect(wrapper.find('#generate-palette')[0].hasClass('is-danger')).to.equal(true);
   });
 
   it('gives .fa a class fa-check when isValid is true and isDirty is true', () => {
-    const wrapper = mount(GeneratePaletteForm, { store });
+    const wrapper = mount(GeneratePaletteForm);
     wrapper.setData({ isValid: true, isDirty: true });
     expect(wrapper.find('i')[0].hasClass('fa-check')).to.equal(true);
   });
 
   it('gives .fa a class fa-warning when isValid is true and isDirty is true', () => {
-    const wrapper = mount(GeneratePaletteForm, { store });
+    const wrapper = mount(GeneratePaletteForm);
     wrapper.setData({ isInvalid: true, isDirty: true });
     expect(wrapper.find('i')[0].hasClass('fa-warning')).to.equal(true);
   });

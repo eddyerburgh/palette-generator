@@ -1,5 +1,4 @@
 <template>
-  <div class="text-align-center">
         <form
           class="field is-grouped"
           v-on:submit.prevent="generatePaletteIfValidColor">
@@ -35,14 +34,6 @@
             />
           </p>
       </form>
-    <button
-            @click="generateRandomPalette()"
-            id="random-generate"
-            class="button is-primary"
-    >
-	    generate random palette
-	    </button>
-  </div>
 </template>
 
 <script>

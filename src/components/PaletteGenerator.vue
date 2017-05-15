@@ -7,7 +7,7 @@
         <div class="container">
           <div class="columns">
             <div class="column">
-              <generate-palette-form />
+              <palette-input />
             </div>
             <div class="column">
               <history-list
@@ -29,7 +29,7 @@
 <script>
   import { mapGetters, mapActions } from 'vuex';
   import copyToClipboard from 'copy-to-clipboard';
-  import GeneratePaletteForm from '@/components/input/GeneratePaletteForm';
+  import PaletteInput from '@/components/input/PaletteInput';
   import Palette from '@/components/palette/Palette';
   import HistoryList from '@/components/HistoryList';
   import { hexToRgb } from '@/lib/convert';
@@ -42,7 +42,7 @@
     ]),
 
     components: {
-      GeneratePaletteForm,
+      PaletteInput,
       Palette,
       HistoryList,
     },
