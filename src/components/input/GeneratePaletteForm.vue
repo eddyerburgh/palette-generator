@@ -38,7 +38,7 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { isValidRgb, isValidHex } from '@/lib/validators';
+import isColor from 'is-color';
 
 export default{
   name: 'generate-palette-form',
@@ -62,10 +62,7 @@ export default{
       }
     },
     validateInput() {
-      if (isValidHex(this.inputValue)) {
-        this.isValid = true;
-        this.isInvalid = false;
-      } else if (isValidRgb(this.inputValue)) {
+      if (isColor(this.inputValue)) {
         this.isValid = true;
         this.isInvalid = false;
       } else {

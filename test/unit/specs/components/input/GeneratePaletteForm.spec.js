@@ -4,9 +4,9 @@ import { expect } from 'chai';
 import GeneratePaletteForm from '@/components/input/GeneratePaletteForm';
 
 describe('GeneratePaletteForm.vue', () => {
-  it('calls store action generatePalette when form is submitted with valid rgb', () => {
+  it('calls store action generatePalette when form is submitted with valid css color', () => {
     const rgb = 'rgb(0,0,0)';
-    GeneratePaletteForm.__Rewire__('isValidRgb', () => true);
+    GeneratePaletteForm.__Rewire__('isColor', () => true);
     const $store = { dispatch: sinon.stub() };
     const wrapper = mount(GeneratePaletteForm, { globals: { $store } });
     wrapper.find('#generate-palette')[0].element.value = rgb;
@@ -14,7 +14,7 @@ describe('GeneratePaletteForm.vue', () => {
     wrapper.find('form')[0].simulate('submit');
     expect($store.dispatch.calledOnce).to.equal(true);
     expect($store.dispatch.calledWith('generatePalette', rgb)).to.equal(true);
-    GeneratePaletteForm.__ResetDependency__('isValidRgb');
+    GeneratePaletteForm.__ResetDependency__('isColor');
   });
 
   it('gives #generate-palette a class of is-success if data.isValid is true and isDirty is true', () => {
@@ -41,34 +41,19 @@ describe('GeneratePaletteForm.vue', () => {
     expect(wrapper.find('i')[0].hasClass('fa-warning')).to.equal(true);
   });
 
-  it('when change is called, sets isValid true and isInvalid false when isValidRgb returns true', () => {
-    GeneratePaletteForm.__Rewire__('isValidRgb', () => true);
+  it('when change is called, sets isValid true and isInvalid false when isColor returns true', () => {
+    GeneratePaletteForm.__Rewire__('isColor', () => true);
     const wrapper = mount(GeneratePaletteForm);
     expect(wrapper.vm.isValid).to.equal(false);
     const generatePalette = wrapper.find('#generate-palette')[0];
     generatePalette.element.value = 'rgb(0,0,0)';
     generatePalette.simulate('input');
     expect(wrapper.vm.isValid).to.equal(true);
-    GeneratePaletteForm.__ResetDependency__('isValidRgb');
+    GeneratePaletteForm.__ResetDependency__('isColor');
   });
 
-  it('when change is called, sets isValid true and isInvalid false when isValidHex returns true', () => {
-    GeneratePaletteForm.__Rewire__('isValidHex', () => true);
-    GeneratePaletteForm.__Rewire__('isValidRgb', () => false);
-    const wrapper = mount(GeneratePaletteForm);
-    wrapper.setData({ isInvalid: true, isValid: false });
-    const generatePalette = wrapper.find('#generate-palette')[0];
-    generatePalette.element.value = 'rgb(0,0,0)';
-    generatePalette.simulate('input');
-    expect(wrapper.vm.isValid).to.equal(true);
-    expect(wrapper.vm.isInvalid).to.equal(false);
-    GeneratePaletteForm.__ResetDependency__('isValidHex');
-    GeneratePaletteForm.__ResetDependency__('isValidRgb');
-  });
-
-  it('when change is called, sets isValid false and isInvalid true when isValidHex and isValidRgb returns false', () => {
-    GeneratePaletteForm.__Rewire__('isValidHex', () => false);
-    GeneratePaletteForm.__Rewire__('isValidRgb', () => false);
+  it('when change is called, sets isValid false and isInvalid true when isColor returns false', () => {
+    GeneratePaletteForm.__Rewire__('isColor', () => false);
     const wrapper = mount(GeneratePaletteForm);
     wrapper.setData({ isValid: true, isInvalid: false });
     const generatePalette = wrapper.find('#generate-palette')[0];
@@ -76,7 +61,6 @@ describe('GeneratePaletteForm.vue', () => {
     generatePalette.simulate('input');
     expect(wrapper.vm.isValid).to.equal(false);
     expect(wrapper.vm.isInvalid).to.equal(true);
-    GeneratePaletteForm.__ResetDependency__('isValidHex');
-    GeneratePaletteForm.__ResetDependency__('isValidRgb');
+    GeneratePaletteForm.__ResetDependency__('isColor');
   });
 });
