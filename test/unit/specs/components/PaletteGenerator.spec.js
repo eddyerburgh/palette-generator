@@ -33,8 +33,6 @@ describe('PaletteGenerator.vue', () => {
   it('calls this.$store.dispatch with props.hex if it exists', () => {
     const dispatch = sinon.stub();
     const hex = '666';
-    const rgb = 'rgb(1,1,1)';
-    PaletteGenerator.__Rewire__('hexToRgb', sinon.stub().withArgs(hex).returns(rgb));
 
     mount(PaletteGenerator, {
       globals: {
@@ -43,8 +41,7 @@ describe('PaletteGenerator.vue', () => {
       propsData: { hex },
     });
     expect(dispatch.called).to.equal(true);
-    expect(dispatch.calledWith('generatePalette', { rgb })).to.equal(true);
-    PaletteGenerator.__ResetDependency__('hexToRgb');
+    expect(dispatch.calledWith('generatePalette', { rgb: hex })).to.equal(true);
   });
 
   it('renders Palette with props of state.palette', () => {

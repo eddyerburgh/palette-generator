@@ -27,8 +27,8 @@ const actions = {
     window.history.pushState({ hex: hexWithoutHash }, document.title, `${location.origin}/${hexWithoutHash}`);
   },
 
-  generatePalette({ commit }, { rgb }) {
-    const palette = generatePalette(rgb);
+  generatePalette({ commit }, color) {
+    const palette = generatePalette(color);
     commit('updatePalette', palette);
     commit('addPaletteToHistory', palette);
     const hexWithoutHash = palette.hex.primary.substr(1);

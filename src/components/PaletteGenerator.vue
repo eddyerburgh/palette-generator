@@ -32,7 +32,6 @@
   import PaletteInput from '@/components/input/PaletteInput';
   import Palette from '@/components/palette/Palette';
   import HistoryList from '@/components/HistoryList';
-  import { hexToRgb } from '@/lib/convert';
 
   export default {
     name: 'palette-generator',
@@ -68,7 +67,7 @@
 
     beforeMount() {
       if (this.hex) {
-        this.$store.dispatch('generatePalette', { rgb: hexToRgb(this.hex) });
+        this.$store.dispatch('generatePalette', { rgb: this.hex });
       }
     },
   };

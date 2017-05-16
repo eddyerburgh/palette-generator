@@ -39,7 +39,6 @@
 <script>
 import { mapActions } from 'vuex';
 import { isValidRgb, isValidHex } from '@/lib/validators';
-import { hexToRgb } from '@/lib/convert';
 
 export default{
   name: 'generate-palette-form',
@@ -57,13 +56,9 @@ export default{
     ]),
     generatePaletteIfValidColor() {
       this.isDirty = true;
-      if (isValidHex(this.inputValue)) {
+      if (this.isValid) {
         this.isDirty = false;
-        this.$store.dispatch('generatePalette', { rgb: hexToRgb(this.inputValue) });
-      }
-      if (isValidRgb(this.inputValue)) {
-        this.isDirty = false;
-        this.$store.dispatch('generatePalette', { rgb: this.inputValue });
+        this.$store.dispatch('generatePalette', this.inputValue);
       }
     },
     validateInput() {

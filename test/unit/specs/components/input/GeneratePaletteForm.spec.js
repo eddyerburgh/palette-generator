@@ -13,7 +13,7 @@ describe('GeneratePaletteForm.vue', () => {
     wrapper.find('#generate-palette')[0].simulate('input');
     wrapper.find('form')[0].simulate('submit');
     expect($store.dispatch.calledOnce).to.equal(true);
-    expect($store.dispatch.calledWith('generatePalette', { rgb })).to.equal(true);
+    expect($store.dispatch.calledWith('generatePalette', rgb)).to.equal(true);
     GeneratePaletteForm.__ResetDependency__('isValidRgb');
   });
 
