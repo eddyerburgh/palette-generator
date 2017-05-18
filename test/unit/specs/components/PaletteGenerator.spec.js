@@ -41,7 +41,7 @@ describe('PaletteGenerator.vue', () => {
       propsData: { hex },
     });
     expect(dispatch.called).to.equal(true);
-    expect(dispatch.calledWith('generatePalette', { rgb: hex })).to.equal(true);
+    expect(dispatch.calledWith('generatePalette', `#${hex}`)).to.equal(true);
   });
 
   it('renders Palette with props of state.palette', () => {

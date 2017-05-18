@@ -67,7 +67,7 @@
 
     beforeMount() {
       if (this.hex) {
-        this.$store.dispatch('generatePalette', { rgb: this.hex });
+        this.$store.dispatch('generatePalette', `#${this.hex}`);
       }
     },
   };
