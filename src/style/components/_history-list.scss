@@ -1,3 +1,11 @@
 .history-list {
   height: 100%;
 }
+
+.palette--history-list__container {
+  transition: all 0.2s ease-in;
+
+  &:hover {
+    transform: scale(1.025, 1.025);
+  }
+}
