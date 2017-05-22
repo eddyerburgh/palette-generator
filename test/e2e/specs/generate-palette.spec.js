@@ -11,6 +11,7 @@ module.exports = {
       .assert.elementCount('.palette--main .swatch', 4)
       .end();
   },
+
   'palette is generated when valid hex is typed in input': function test(browser) {
     const devServer = browser.globals.devServerURL;
 
@@ -26,4 +27,18 @@ module.exports = {
       .end();
   },
 
+  'history list is created when new palette added that can be clicked on to regenerate palette': function test(browser) {
+    const devServer = `${browser.globals.devServerURL}/555444`;
+
+    browser
+      .url(devServer)
+      .waitForElementVisible('.swatch', 10000)
+      .assert.elementCount('.palette--main .swatch', 4)
+      .assert.elementCount('.palette--history-list .swatch', 4)
+      .click('#random-generate')
+      .assert.elementCount('.palette--history-list .swatch', 8)
+      .click('.palette--history-list__container:nth-of-type(2) .palette--history-list')
+      .assert.cssProperty('.palette--main .swatch:first-of-type', 'background-color', 'rgba(85, 84, 68, 1)')
+      .end();
+  },
 };
