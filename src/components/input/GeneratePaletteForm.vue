@@ -29,6 +29,7 @@
           <p class="control">
             <input
               type="submit"
+              id="generate-palette-submit"
               class="button"
               v-on:submit.prevent="generatePaletteIfValidColor"
             />
