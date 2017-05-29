@@ -8,16 +8,22 @@ const initialState = {
     tone: null,
   },
   history: [],
+  format: 'rgb',
 };
 
 // getters
 const getters = {
   palette: state => state.palette,
   history: state => state.history,
+  format: state => state.format,
 };
 
 // actions
 const actions = {
+  changeFormat({ commit }, format) {
+    commit('changeFormat', format);
+  },
+
   generateRandomPalette({ commit }) {
     const rgb = randomRgb();
     const palette = generatePalette(rgb);
@@ -45,6 +51,10 @@ const actions = {
 
 // mutations
 const mutations = {
+  changeFormat(state, format) {
+    state.format = format; // eslint-disable-line no-param-reassign
+  },
+
   updatePalette(state, palette) {
     state.palette = palette; // eslint-disable-line no-param-reassign
   },

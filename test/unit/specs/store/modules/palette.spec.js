@@ -77,7 +77,8 @@ describe('palette', () => {
           hex: {
             primary: 'primary',
           },
-        }; const commit = sinon.stub();
+        };
+        const commit = sinon.stub();
         paletteModule.actions.updatePalette({ commit }, { palette });
         expect(commit.calledWith('updatePalette', palette)).to.equal(true);
       });
@@ -87,7 +88,8 @@ describe('palette', () => {
           hex: {
             primary: 'primary',
           },
-        }; const commit = sinon.stub();
+        };
+        const commit = sinon.stub();
         paletteModule.actions.updatePalette({ commit }, { palette });
         expect(commit.calledWith('addPaletteToHistory', palette)).to.equal(true);
       });
@@ -103,9 +105,27 @@ describe('palette', () => {
         expect(window.location.href).to.equal(`${location.origin}/${hex}`);
       });
     });
+
+    describe('changeFormat', () => {
+      it('calls commit with format', () => {
+        const commit = sinon.stub();
+        const format = 'a format';
+        paletteModule.actions.changeFormat({ commit }, format);
+        expect(commit.calledWith('changeFormat', format)).to.equal(true);
+      });
+    });
   });
 
   describe('getters', () => {
+    describe('format', () => {
+      it('returns state.format', () => {
+        const state = {
+          format: 'format',
+        };
+        expect(paletteModule.getters.format(state)).to.equal(state.format);
+      });
+    });
+
     describe('palette', () => {
       it('returns state.palette', () => {
         const state = {
@@ -131,6 +151,15 @@ describe('palette', () => {
         const palette = { palette: true };
         paletteModule.mutations.updatePalette(state, palette);
         expect(state.palette).to.equal(palette);
+      });
+    });
+
+    describe('changeFormat', () => {
+      it('adds format to state.format', () => {
+        const state = {};
+        const format = 'hsl';
+        paletteModule.mutations.changeFormat(state, format);
+        expect(state.format).to.equal(format);
       });
     });
 
