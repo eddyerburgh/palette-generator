@@ -5,25 +5,25 @@
       :class="className"
     >
 	    <swatch
-        :color="palette.rgb.primary"
+        :color="palette[format].primary"
         :tone="palette.tone.primary"
         :displayColor="displayColor"
         :handleClick="swatchOnClick"
       />
 	    <swatch
-        :color="palette.rgb.accent"
+        :color="palette[format].accent"
         :tone="palette.tone.accent"
         :displayColor="displayColor"
         :handleClick="swatchOnClick"
       />
 	    <swatch
-        :color="palette.rgb.grayLight"
+        :color="palette[format].grayLight"
         :tone="palette.tone.grayLight"
         :displayColor="displayColor"
         :handleClick="swatchOnClick"
       />
 	    <swatch
-        :color="palette.rgb.grayDark"
+        :color="palette[format].grayDark"
         :tone="palette.tone.grayDark"
         :displayColor="displayColor"
         :handleClick="swatchOnClick"
@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import Swatch from '@/components/palette/Swatch';
 
 export default{
@@ -43,6 +44,11 @@ export default{
     'swatchOnClick',
     'handleClick',
   ],
+  computed: {
+    ...mapGetters([
+      'format',
+    ]),
+  },
   components: {
     Swatch,
   },

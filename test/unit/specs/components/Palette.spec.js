@@ -1,9 +1,15 @@
 import { mount } from 'avoriaz';
+import Vue from 'vue';
+import Vuex from 'vuex';
 import Palette from '@/components/palette/Palette';
 import Swatch from '@/components/palette/Swatch';
 
+Vue.use(Vuex);
+
 describe('Palette.vue', () => {
   let palette;
+  let getters;
+  let store;
 
   beforeEach(() => {
     palette = {
@@ -13,6 +19,9 @@ describe('Palette.vue', () => {
         grayLight: 'rgb(255,0,0)',
         grayDark: 'rgb(0,255,0)',
       },
+      hex: {
+        primary: '#000',
+      },
       tone: {
         primary: 'rgb(0,0,10)',
         accent: 'rgb(10,0,1)',
@@ -20,6 +29,13 @@ describe('Palette.vue', () => {
         grayDark: 'rgb(0,255,10)',
       },
     };
+    getters = {
+      format: () => 'rgb',
+    };
+
+    store = new Vuex.Store({
+      getters,
+    });
   });
 
   it('renders swatch using props.palette with color and tone', () => {
@@ -27,6 +43,7 @@ describe('Palette.vue', () => {
       propsData: {
         palette,
       },
+      store,
     });
 
     expect(wrapper.find(Swatch)[0].vm.color).to.equal(palette.rgb.primary);
@@ -39,12 +56,29 @@ describe('Palette.vue', () => {
     expect(wrapper.find(Swatch)[3].vm.tone).to.equal(palette.tone.grayDark);
   });
 
+  it('renders swatch with hex color if format getter returns hex', () => {
+    store = new Vuex.Store({
+      getters: {
+        format: () => 'hex',
+      },
+    });
+    const wrapper = mount(Palette, {
+      propsData: {
+        palette,
+      },
+      store,
+    });
+
+    expect(wrapper.find(Swatch)[0].vm.color).to.equal(palette.hex.primary);
+  });
+
   it('renders div with class props.className', () => {
     const wrapper = mount(Palette, {
       propsData: {
         className: 'class-name',
         palette,
       },
+      store,
     });
     expect(wrapper.find('.class-name').length).to.equal(1);
   });
@@ -56,6 +90,7 @@ describe('Palette.vue', () => {
         displayColor,
         palette,
       },
+      store,
     });
     expect(wrapper.find(Swatch)[0].vm.displayColor).to.equal(displayColor);
   });
@@ -67,6 +102,7 @@ describe('Palette.vue', () => {
         palette,
         swatchOnClick,
       },
+      store,
     });
     expect(wrapper.find(Swatch)[0].vm.handleClick).to.equal(swatchOnClick);
   });
@@ -78,6 +114,7 @@ describe('Palette.vue', () => {
         palette,
         handleClick,
       },
+      store,
     });
     wrapper.find('div')[0].simulate('click');
     expect(handleClick.calledOnce).to.equal(true);

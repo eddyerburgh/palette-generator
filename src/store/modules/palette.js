@@ -8,7 +8,7 @@ const initialState = {
     tone: null,
   },
   history: [],
-  format: 'rgb',
+  format: 'hex',
 };
 
 // getters
