@@ -27,6 +27,21 @@ module.exports = {
       .end();
   },
 
+  'clicking radio button with value rgb sets swatch color text to be rgb': function test(browser) {
+    const devServer = browser.globals.devServerURL;
+
+    browser
+          .url(devServer)
+          .waitForElementVisible('#app', 10000)
+          .setValue('#generate-palette', '#fff')
+          .click('#generate-palette-submit')
+          .waitForElementVisible('.swatch', 10000)
+          .assert.containsText('.palette--main .swatch:first-of-type', '#FFFFFF')
+          .click('[value="rgb"]')
+          .assert.containsText('.palette--main .swatch:first-of-type', 'rgb(255, 255, 255)')
+          .end();
+  },
+
   'history list is created when new palette added that can be clicked on to regenerate palette': function test(browser) {
     const devServer = `${browser.globals.devServerURL}/555444`;
 
